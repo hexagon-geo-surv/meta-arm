@@ -187,8 +187,9 @@ qemuarm64:
     matrix:
       - TOOLCHAINS: [gcc, clang]
         EFI: [uboot, edk2]
+        VIRT: [none, xen, xen-guest]
         TESTING: testimage
-      - VIRT: xen
+>>>>>>> 8ba4a3a35708 (ci: do xen guest testing)
 
 qemuarm-secureboot:
   extends: .build
@@ -204,13 +205,20 @@ qemuarm:
       - TOOLCHAINS: [gcc, clang]
         EFI: [uboot, edk2]
         TESTING: testimage
-      - VIRT: xen
+        VIRT: [none, xen, xen-guest]
 
 qemuarmv5:
   extends: .build
   parallel:
     matrix:
       - TESTING: testimage
+
+qemux86-64:
+  extends: .build
+  parallel:
+    matrix:
+      - TESTING: testimage
+        VIRT: [none, xen, xen-guest]
 
 sgi575:
   extends: .build
