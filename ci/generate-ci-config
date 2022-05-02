@@ -110,4 +110,4 @@ echo -e "$MACHINE:
     paths:
       - $CI_PROJECT_DIR/work/build/tmp/work*/**/temp/log.do_*.*
 $TAGS
-"
+" | sed '/\[none\]/d'
