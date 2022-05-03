@@ -25,13 +25,13 @@ case $TEST_LEVEL in
 		FIRMWARE="none"
 		;;
 	4)
-		TC="gcc, clang, armgcc, external-gccarm"
-		LIBC="glibc"
+		TC="gcc, clang, armgcc"
+		LIBC="glibc, musl"
 		VIRT="none"
 		FIRMWARE="none"
 		;;
-	3)
-		TC="gcc, armgcc, external-gccarm"
+	*)
+		TC="gcc, armgcc, clang"
 		LIBC="glibc"
 		VIRT="none"
 		FIRMWARE="none"
@@ -42,7 +42,7 @@ case $TEST_LEVEL in
 		VIRT="none"
 		FIRMWARE="none"
 		;;
-	*)
+	1)
 		TC="gcc"
 		LIBC="glibc"
 		VIRT="none"

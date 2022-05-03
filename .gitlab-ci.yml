@@ -49,7 +49,7 @@ rtos-machine-config:
   stage: prep
   script:
     # avoid combinations that do not work on Zephyr or TF-M
-    - for i in $(grep -l "meta-zephyr\.yml" ci/*.yml | xargs -i grep machine {} | cut -d ':' -f 2 | sort -u | grep -v unset); do ./ci/generate-ci-config $i quick >> rtos-machine-config.yml; done
+    - for i in $(grep -l "meta-zephyr\.yml" ci/*.yml | xargs -i grep machine {} | cut -d ':' -f 2 | sort -u | grep -v unset); do ./ci/generate-ci-config $i 1 >> rtos-machine-config.yml; done
   artifacts:
     paths:
       - rtos-machine-config.yml
