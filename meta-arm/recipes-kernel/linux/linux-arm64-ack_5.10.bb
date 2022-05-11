@@ -8,5 +8,5 @@ SRC_URI = " \
     git://android.googlesource.com/kernel/common.git;protocol=https;branch=android12-5.10-lts \
     "
 
-# tag: ASB-2021-09-05_12-5.10
-SRCREV = "3d371f087c953c0e08a228169d4e5c44aea99416"
+# tag: ASB-2022-05-05_12-5.10
+SRCREV = "0780756946db50a7a17d98876958ed96e5fdee68"
