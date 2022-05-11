@@ -15,9 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://k/perf_event.h;endline=14;md5=e548bf30a60b2ed11ef2dcf7bfdac230 \
                    "
 
-SRCREV = "9d8d75fa08352470c51abc23fe3b314879bd8b78"
+SRCREV = "e9456562627e8632fd59ad48fc5ebafcbedd686b"
 SRC_URI = "git://github.com/ARM-software/gator.git;protocol=http;branch=main;protocol=https \
-           file://0001-Sources.mk-Remove-xml-PmuXMLParser.h-header-from-GAT.patch;striplevel=2 \
           "
 
 S = "${WORKDIR}/git/daemon"
