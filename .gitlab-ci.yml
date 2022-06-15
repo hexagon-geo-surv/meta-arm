@@ -180,6 +180,7 @@ qemuarm64-secureboot:
       - TOOLCHAINS: [gcc, clang]
         TCLIBC: [glibc, musl]
         TESTING: testimage
+      - EFI: [uboot, edk2]
 
 qemuarm64:
   extends: .build
@@ -196,6 +197,7 @@ qemuarm-secureboot:
     matrix:
       - TOOLCHAINS: [gcc, clang]
         TESTING: testimage
+      - EFI: [uboot, edk2]
 
 qemuarm:
   extends: .build
