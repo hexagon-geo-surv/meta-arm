@@ -1,10 +1,7 @@
-Upstream-Status: Pending [Not submitted to upstream yet]
-Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
-
-From c88937f3fb2d1259b1abb1a6926e869bf2f5d69e Mon Sep 17 00:00:00 2001
+From 23af5f92882b50927fd444e2449081ac30ea3b4f Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Fri, 24 Dec 2021 19:17:17 +0000
-Subject: [PATCH] smm_gateway: add checks for null attributes
+Subject: [PATCH 32/47] smm_gateway: add checks for null attributes
 
 As par EDK-2 and EDK-2 test code, when a user issue's
 setVariable() with 0 in attributes field, it means a variable
@@ -13,8 +10,16 @@ This change is to add that support
 
 Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
 
+Upstream-Status: Pending [Not submitted to upstream yet]
+Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
+
+%% original patch: 0032-smm_gateway-add-checks-for-null-attributes.patch
+---
+ .../backend/uefi_variable_store.c             | 28 ++++++++++++-------
+ 1 file changed, 18 insertions(+), 10 deletions(-)
+
 diff --git a/components/service/smm_variable/backend/uefi_variable_store.c b/components/service/smm_variable/backend/uefi_variable_store.c
-index a57b334..e8771c2 100644
+index a57b3346..e8771c21 100644
 --- a/components/service/smm_variable/backend/uefi_variable_store.c
 +++ b/components/service/smm_variable/backend/uefi_variable_store.c
 @@ -167,7 +167,9 @@ efi_status_t uefi_variable_store_set_variable(
@@ -75,5 +80,5 @@ index a57b334..e8771c2 100644
  			status = EFI_INVALID_PARAMETER;
  		}
 -- 
-2.17.1
+2.30.2
 

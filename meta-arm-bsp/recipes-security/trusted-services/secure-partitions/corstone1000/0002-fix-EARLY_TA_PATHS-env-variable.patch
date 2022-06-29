@@ -1,21 +1,23 @@
-Upstream-Status: Pending [Not submitted to upstream yet]
-Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-
-From a0673905e8f63877b631a29fab56ea42bf748549 Mon Sep 17 00:00:00 2001
+From 32964c2001265861f6325952d1cd982ecf84b95c Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Sat, 13 Nov 2021 07:51:53 +0000
-Subject: [PATCH] fix EARLY_TA_PATHS env variable
+Subject: [PATCH 02/47] fix EARLY_TA_PATHS env variable
 
 Yocto cleans up environment varaibles at build time.
 EARLY_TA_PATHS should be set a separate rule for securepartitions
 to be included into optee-os image
 
 Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
+Upstream-Status: Pending [Not submitted to upstream yet]
+Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
 %% original patch: 0002-fix-EARLY_TA_PATHS-env-variable.patch
+---
+ environments/opteesp/sp.mk.in | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/environments/opteesp/sp.mk.in b/environments/opteesp/sp.mk.in
-index c44ad59..d67e2dc 100644
+index c44ad59e..d67e2dca 100644
 --- a/environments/opteesp/sp.mk.in
 +++ b/environments/opteesp/sp.mk.in
 @@ -14,7 +14,8 @@ ifeq (,${@EXPORT_SP_UUID@-included})
@@ -29,5 +31,5 @@ index c44ad59..d67e2dc 100644
  else ifeq (fip,${SP_PACKAGING_METHOD})
  TS_SP_JSON_LIST+=${TS_INSTALL_PREFIX}/opteesp/json/@EXPORT_SP_NAME@.json
 -- 
-2.25.1
+2.30.2
 

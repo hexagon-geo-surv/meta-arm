@@ -1,10 +1,7 @@
-Upstream-Status: Pending [Not submitted to upstream yet]
-Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
-
-From b8588aaefaef19ddd33abf57190501dc0d624587 Mon Sep 17 00:00:00 2001
+From 5d8f076900f1cda3ee112b8cc7ab735bdf90de51 Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Fri, 3 Dec 2021 19:25:34 +0000
-Subject: [PATCH] Use secure storage ipc and openamp for se_proxy
+Subject: [PATCH 13/47] Use secure storage ipc and openamp for se_proxy
 
 Remove mock up backend for secure storage in se proxy
 deployment and use instead the secure storage ipc backend with
@@ -12,10 +9,16 @@ openamp as rpc to secure enclave side.
 
 Signed-off-by: Rui Miguel Silva <rui.silva@arm.com>
 
+Upstream-Status: Pending [Not submitted to upstream yet]
+Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
+
 %% original patch: 0013-Use-secure-storage-ipc-and-openamp-for-se_proxy.patch
+---
+ .../se-proxy/opteesp/service_proxy_factory.c     | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/deployments/se-proxy/opteesp/service_proxy_factory.c b/deployments/se-proxy/opteesp/service_proxy_factory.c
-index acfb6e8..5729005 100644
+index acfb6e88..57290056 100644
 --- a/deployments/se-proxy/opteesp/service_proxy_factory.c
 +++ b/deployments/se-proxy/opteesp/service_proxy_factory.c
 @@ -6,15 +6,20 @@
@@ -59,5 +62,5 @@ index acfb6e8..5729005 100644
  	return secure_storage_provider_init(&ps_provider, backend);
  }
 -- 
-2.25.1
+2.30.2
 
