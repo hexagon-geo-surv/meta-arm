@@ -1,10 +1,7 @@
-Upstream-Status: Pending [Not submitted to upstream yet]
-Signed-off-by: Emekcan Aras <Emekcan.Aras@arm.com>
-
-From 68e189877ea1aa893facafb8b336e92112555e07 Mon Sep 17 00:00:00 2001
+From c7a6864dd1f2a3503d3cfb240fbc6a266a3750e8 Mon Sep 17 00:00:00 2001
 From: Julian Hall <julian.hall@arm.com>
 Date: Fri, 11 Feb 2022 14:19:26 +0000
-Subject: [PATCH 05/15] Add defence against uninitialised multi-part
+Subject: [PATCH 37/47] Add defence against uninitialised multi-part
  transaction
 
 Adds checks for the condition where there is an attempt to
@@ -13,6 +10,11 @@ transaction state.
 
 Signed-off-by: Julian Hall <julian.hall@arm.com>
 Change-Id: I754479260fed0490d8f32b41a077d26028dc9903
+
+Upstream-Status: Pending [Not submitted to upstream yet]
+Signed-off-by: Emekcan Aras <Emekcan.Aras@arm.com>
+
+%% original patch: 0037-Add-defence-against-uninitialised-multi-part-transac.patch
 ---
  components/service/crypto/client/psa/psa_cipher.c | 14 +++++++++++++-
  components/service/crypto/client/psa/psa_hash.c   |  8 +++++++-
@@ -70,7 +72,7 @@ index 7005c390..83278de6 100644
 @@ -14,6 +14,9 @@ psa_status_t psa_hash_setup(psa_hash_operation_t *operation,
  	if (psa_crypto_client_instance.init_status != PSA_SUCCESS)
  		return psa_crypto_client_instance.init_status;
-
+ 
 +	if (operation->handle)
 +		return PSA_ERROR_BAD_STATE;
 +
@@ -101,7 +103,7 @@ index 5efa1c4d..5c5eb32a 100644
 @@ -16,6 +16,9 @@ psa_status_t psa_mac_sign_setup(psa_mac_operation_t *operation,
  	if (psa_crypto_client_instance.init_status != PSA_SUCCESS)
  		return psa_crypto_client_instance.init_status;
-
+ 
 +	if (operation->handle)
 +		return PSA_ERROR_BAD_STATE;
 +
@@ -111,7 +113,7 @@ index 5efa1c4d..5c5eb32a 100644
 @@ -28,7 +31,10 @@ psa_status_t psa_mac_verify_setup(psa_mac_operation_t *operation,
  	if (psa_crypto_client_instance.init_status != PSA_SUCCESS)
  		return psa_crypto_client_instance.init_status;
-
+ 
 -	return crypto_caller_mac_sign_setup(&psa_crypto_client_instance.base,
 +	if (operation->handle)
 +		return PSA_ERROR_BAD_STATE;
@@ -120,5 +122,6 @@ index 5efa1c4d..5c5eb32a 100644
  		&operation->handle,
  		key, alg);
  }
---
-2.25.1
+-- 
+2.30.2
+
