@@ -1,8 +1,7 @@
-From 2edfe3f7c44028fccdc8f8c71461e8c5a0b0b14e Mon Sep 17 00:00:00 2001
+From d1f9485fbae75b6bff6d3b3e339d2eae750fbac4 Mon Sep 17 00:00:00 2001
 From: Peter Hoyes <Peter.Hoyes@arm.com>
 Date: Fri, 10 Dec 2021 11:41:19 +0000
-Subject: [PATCH 3/8] armv8: Allow disabling exception vectors on non-SPL
- builds
+Subject: [PATCH] armv8: Allow disabling exception vectors on non-SPL builds
 
 On the BASER_FVP, U-Boot shares EL2 with another bootloader, so we do
 not wish to overide the exception vector, but we are also not using an
@@ -19,6 +18,7 @@ Upstream-Status: Inappropriate [other]
   Implementation pending further discussion
 Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
 Change-Id: I0cf0fc6d7ef4d45791411cf1f67c65e198cc8b2b
+
 ---
  arch/arm/cpu/armv8/Kconfig        | 10 ++++++++--
  arch/arm/cpu/armv8/Makefile       |  6 ++----
@@ -116,6 +116,3 @@ index 6fa7c979f6..402062cecf 100644
  CONFIG_VIRTIO_NET=y
  CONFIG_ARCH_FIXUP_FDT_MEMORY=n
 +CONFIG_ARMV8_EXCEPTION_VECTORS=n
--- 
-2.25.1
-

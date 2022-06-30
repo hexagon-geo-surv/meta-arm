@@ -1,8 +1,7 @@
-From 67a755f74716068cfd44a8897c31151fe9ee4328 Mon Sep 17 00:00:00 2001
+From e932ab59fb315cb9f3d9e1cc8250304e583f21da Mon Sep 17 00:00:00 2001
 From: Gowtham Suresh Kumar <gowtham.sureshkumar@arm.com>
 Date: Thu, 18 Nov 2021 16:42:59 +0000
-Subject: [PATCH 13/27] corstone1000: Make sure shared buffer contents are not
- cached
+Subject: [PATCH] corstone1000: Make sure shared buffer contents are not cached
 
 After updating the shared buffer, it is required to flush the cache
 to ensure that the secure world sees expected the shared buffer
@@ -14,17 +13,16 @@ update the buffer on uboot otherwise the secure world does not see the
 accurate values.
 
 Signed-off-by: Gowtham Suresh Kumar <gowtham.sureshkumar@arm.com>
-%% original patch: 0027-Make-sure-shared-buffer-contents-are-not-cached.patch
 
-%% original patch: 0027-Make-sure-shared-buffer-contents-are-not-cached.patch
 
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  lib/efi_loader/efi_variable_tee.c | 6 ++++++
  1 file changed, 6 insertions(+)
 
 diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 9cb8cfb9c779..b6be2b54a030 100644
+index 9cb8cfb9c7..b6be2b54a0 100644
 --- a/lib/efi_loader/efi_variable_tee.c
 +++ b/lib/efi_loader/efi_variable_tee.c
 @@ -22,6 +22,7 @@
@@ -47,6 +45,3 @@ index 9cb8cfb9c779..b6be2b54a030 100644
  	/* Announce there is data in the shared buffer */
  
  	ffa_ret = ffa_notify_mm_sp();
--- 
-2.30.2
-

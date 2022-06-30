@@ -1,4 +1,4 @@
-From 13dde05efae99c5261ed213108087d0f7ac9581e Mon Sep 17 00:00:00 2001
+From 0ab00b29fd8d51eb3090d4ba9a1c6433a4532d95 Mon Sep 17 00:00:00 2001
 From: Damodar Santhapuri <damodar.santhapuri@arm.com>
 Date: Thu, 5 Nov 2020 22:40:48 +0530
 Subject: [PATCH] arm: juno: add custom bootcmd to autoboot from uEnv.txt file
@@ -8,12 +8,13 @@ from NOR to DRAM and import.
 
 Signed-off-by: Damodar Santhapuri <damodar.santhapuri@arm.com>
 Upstream-Status: Pending
+
 ---
  include/configs/vexpress_aemv8.h | 12 ++++++------
  1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/include/configs/vexpress_aemv8.h b/include/configs/vexpress_aemv8.h
-index f0c5ceb3849a..cd7f6c1b9ba0 100644
+index f0c5ceb384..cd7f6c1b9b 100644
 --- a/include/configs/vexpress_aemv8.h
 +++ b/include/configs/vexpress_aemv8.h
 @@ -137,13 +137,13 @@
@@ -45,6 +46,3 @@ index f0c5ceb3849a..cd7f6c1b9ba0 100644
  				"fdtfile=board.dtb\0" \
  				"fdt_alt_name=juno\0" \
  				"fdt_addr_r=0x80000000\0" \
--- 
-2.30.2
-

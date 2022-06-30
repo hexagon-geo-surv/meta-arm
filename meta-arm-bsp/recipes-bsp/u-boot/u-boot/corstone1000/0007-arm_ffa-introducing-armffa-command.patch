@@ -1,7 +1,7 @@
-From 541b2b51dc77832ab5845cab4762d29976838d36 Mon Sep 17 00:00:00 2001
+From 217b8a5c289678a837acbbcd2ed15bf8dff8ad6c Mon Sep 17 00:00:00 2001
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Date: Tue, 16 Nov 2021 12:36:27 +0000
-Subject: [PATCH 07/27] arm_ffa: introducing armffa command
+Subject: [PATCH] arm_ffa: introducing armffa command
 
 A new armffa command is provided as an example of how to use
 the FF-A helper functions to communicate with secure world.
@@ -11,6 +11,7 @@ the secure world and exchanging messages with the partitions.
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  MAINTAINERS  |   1 +
  cmd/Kconfig  |  10 ++
@@ -20,7 +21,7 @@ Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
  create mode 100644 cmd/armffa.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 14307e6da644..f3fd559da54a 100644
+index 14307e6da6..f3fd559da5 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -235,6 +235,7 @@ F:	include/configs/turris_*.h
@@ -32,7 +33,7 @@ index 14307e6da644..f3fd559da54a 100644
  F:	include/arm_ffa.h
  F:	include/arm_ffa_helper.h
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index ff50102a89c7..ff124bf4bad0 100644
+index ff50102a89..ff124bf4ba 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
 @@ -813,6 +813,16 @@ endmenu
@@ -53,7 +54,7 @@ index ff50102a89c7..ff124bf4bad0 100644
  	#depends on FLASH_CFI_DRIVER
  	bool "armflash"
 diff --git a/cmd/Makefile b/cmd/Makefile
-index 166c652d9825..770b846c44e0 100644
+index 166c652d98..770b846c44 100644
 --- a/cmd/Makefile
 +++ b/cmd/Makefile
 @@ -12,6 +12,8 @@ obj-y += panic.o
@@ -67,7 +68,7 @@ index 166c652d9825..770b846c44e0 100644
  obj-$(CONFIG_CMD_AES) += aes.o
 diff --git a/cmd/armffa.c b/cmd/armffa.c
 new file mode 100644
-index 000000000000..71a6ebb656d1
+index 0000000000..71a6ebb656
 --- /dev/null
 +++ b/cmd/armffa.c
 @@ -0,0 +1,266 @@
@@ -337,6 +338,3 @@ index 000000000000..71a6ebb656d1
 +	   "	 - sends a data pattern to the specified partition\n"
 +	   "devlist\n"
 +	   "	 - displays the arm_ffa device info\n");
--- 
-2.30.2
-

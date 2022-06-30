@@ -1,7 +1,7 @@
-From ede21dc1ca75132698cc81e88357c5789ccf67c7 Mon Sep 17 00:00:00 2001
+From 0d1f0be24c3f57dcc3939e9e6b250944e537c583 Mon Sep 17 00:00:00 2001
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Date: Tue, 16 Nov 2021 12:34:52 +0000
-Subject: [PATCH 06/27] arm_ffa: introducing Arm FF-A low-level driver
+Subject: [PATCH] arm_ffa: introducing Arm FF-A low-level driver
 
 This driver implements Arm Firmware Framework for Armv8-A on u-boot
 
@@ -23,6 +23,7 @@ FF-A function to use for the communication with secure world.
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  MAINTAINERS                      |    8 +
  arch/arm/cpu/armv8/smccc-call.S  |   27 +
@@ -58,7 +59,7 @@ Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
  create mode 100644 lib/arm-ffa/arm_ffa_helper.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 96582fc67777..14307e6da644 100644
+index 96582fc677..14307e6da6 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -232,6 +232,14 @@ F:	board/CZ.NIC/
@@ -77,7 +78,7 @@ index 96582fc67777..14307e6da644 100644
  M:	Stefano Babic <sbabic@denx.de>
  M:	Fabio Estevam <festevam@gmail.com>
 diff --git a/arch/arm/cpu/armv8/smccc-call.S b/arch/arm/cpu/armv8/smccc-call.S
-index dc92b28777c3..ffc39c9fefa2 100644
+index dc92b28777..ffc39c9fef 100644
 --- a/arch/arm/cpu/armv8/smccc-call.S
 +++ b/arch/arm/cpu/armv8/smccc-call.S
 @@ -1,6 +1,8 @@
@@ -119,7 +120,7 @@ index dc92b28777c3..ffc39c9fefa2 100644
 +
 +#endif
 diff --git a/arch/arm/lib/asm-offsets.c b/arch/arm/lib/asm-offsets.c
-index 22fd541f9a28..45eca83a473c 100644
+index 22fd541f9a..45eca83a47 100644
 --- a/arch/arm/lib/asm-offsets.c
 +++ b/arch/arm/lib/asm-offsets.c
 @@ -9,6 +9,8 @@
@@ -143,7 +144,7 @@ index 22fd541f9a28..45eca83a473c 100644
  	DEFINE(ARM_SMCCC_QUIRK_STATE_OFFS, offsetof(struct arm_smccc_quirk, state));
  #endif
 diff --git a/common/board_r.c b/common/board_r.c
-index c24d9b4e220b..af20f38b104c 100644
+index c24d9b4e22..af20f38b10 100644
 --- a/common/board_r.c
 +++ b/common/board_r.c
 @@ -61,6 +61,9 @@
@@ -167,7 +168,7 @@ index c24d9b4e220b..af20f38b104c 100644
  	initr_post,
  #endif
 diff --git a/drivers/Kconfig b/drivers/Kconfig
-index b26ca8cf70c9..e83c23789d1b 100644
+index b26ca8cf70..e83c23789d 100644
 --- a/drivers/Kconfig
 +++ b/drivers/Kconfig
 @@ -6,6 +6,8 @@ source "drivers/core/Kconfig"
@@ -180,7 +181,7 @@ index b26ca8cf70c9..e83c23789d1b 100644
  
  source "drivers/axi/Kconfig"
 diff --git a/drivers/Makefile b/drivers/Makefile
-index 4e7cf284405a..6671d2a604ab 100644
+index 4e7cf28440..6671d2a604 100644
 --- a/drivers/Makefile
 +++ b/drivers/Makefile
 @@ -107,6 +107,7 @@ obj-y += iommu/
@@ -193,7 +194,7 @@ index 4e7cf284405a..6671d2a604ab 100644
  obj-$(CONFIG_W1) += w1/
 diff --git a/drivers/arm-ffa/Kconfig b/drivers/arm-ffa/Kconfig
 new file mode 100644
-index 000000000000..d71444c1fa90
+index 0000000000..d71444c1fa
 --- /dev/null
 +++ b/drivers/arm-ffa/Kconfig
 @@ -0,0 +1,26 @@
@@ -225,7 +226,7 @@ index 000000000000..d71444c1fa90
 +	  all the interactions between Normal world and Secure World.
 diff --git a/drivers/arm-ffa/Makefile b/drivers/arm-ffa/Makefile
 new file mode 100644
-index 000000000000..9fb5bea52299
+index 0000000000..9fb5bea522
 --- /dev/null
 +++ b/drivers/arm-ffa/Makefile
 @@ -0,0 +1,3 @@
@@ -234,7 +235,7 @@ index 000000000000..9fb5bea52299
 +obj-y += arm-ffa-uclass.o core.o
 diff --git a/drivers/arm-ffa/arm-ffa-uclass.c b/drivers/arm-ffa/arm-ffa-uclass.c
 new file mode 100644
-index 000000000000..43f6066281fe
+index 0000000000..43f6066281
 --- /dev/null
 +++ b/drivers/arm-ffa/arm-ffa-uclass.c
 @@ -0,0 +1,67 @@
@@ -307,7 +308,7 @@ index 000000000000..43f6066281fe
 +}
 diff --git a/drivers/arm-ffa/arm_ffa_prv.h b/drivers/arm-ffa/arm_ffa_prv.h
 new file mode 100644
-index 000000000000..38ea4ba83efc
+index 0000000000..38ea4ba83e
 --- /dev/null
 +++ b/drivers/arm-ffa/arm_ffa_prv.h
 @@ -0,0 +1,199 @@
@@ -512,7 +513,7 @@ index 000000000000..38ea4ba83efc
 +#endif
 diff --git a/drivers/arm-ffa/core.c b/drivers/arm-ffa/core.c
 new file mode 100644
-index 000000000000..98e2d2fa1767
+index 0000000000..98e2d2fa17
 --- /dev/null
 +++ b/drivers/arm-ffa/core.c
 @@ -0,0 +1,1484 @@
@@ -2002,7 +2003,7 @@ index 000000000000..98e2d2fa1767
 +};
 diff --git a/include/arm_ffa.h b/include/arm_ffa.h
 new file mode 100644
-index 000000000000..313f46f74764
+index 0000000000..313f46f747
 --- /dev/null
 +++ b/include/arm_ffa.h
 @@ -0,0 +1,191 @@
@@ -2199,7 +2200,7 @@ index 000000000000..313f46f74764
 +#endif
 diff --git a/include/arm_ffa_helper.h b/include/arm_ffa_helper.h
 new file mode 100644
-index 000000000000..0e143e54511e
+index 0000000000..0e143e5451
 --- /dev/null
 +++ b/include/arm_ffa_helper.h
 @@ -0,0 +1,45 @@
@@ -2249,7 +2250,7 @@ index 000000000000..0e143e54511e
 +int ffa_uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin);
 +#endif
 diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-index 0e26e1d13824..a1181b8f48e7 100644
+index 0e26e1d138..a1181b8f48 100644
 --- a/include/dm/uclass-id.h
 +++ b/include/dm/uclass-id.h
 @@ -52,6 +52,7 @@ enum uclass_id {
@@ -2261,7 +2262,7 @@ index 0e26e1d13824..a1181b8f48e7 100644
  	UCLASS_FS_FIRMWARE_LOADER,		/* Generic loader */
  	UCLASS_GPIO,		/* Bank of general-purpose I/O pins */
 diff --git a/include/linux/arm-smccc.h b/include/linux/arm-smccc.h
-index 7f2be2339475..54980a130fdb 100644
+index 7f2be23394..54980a130f 100644
 --- a/include/linux/arm-smccc.h
 +++ b/include/linux/arm-smccc.h
 @@ -1,6 +1,8 @@
@@ -2320,7 +2321,7 @@ index 7f2be2339475..54980a130fdb 100644
  
  #define arm_smccc_smc_quirk(...) __arm_smccc_smc(__VA_ARGS__)
 diff --git a/lib/Kconfig b/lib/Kconfig
-index 3c6fa99b1a6a..473821b882e2 100644
+index 3c6fa99b1a..473821b882 100644
 --- a/lib/Kconfig
 +++ b/lib/Kconfig
 @@ -810,6 +810,7 @@ config SMBIOS_PARSER
@@ -2332,7 +2333,7 @@ index 3c6fa99b1a6a..473821b882e2 100644
  config TEST_FDTDEC
  	bool "enable fdtdec test"
 diff --git a/lib/Makefile b/lib/Makefile
-index 11b03d1cbec8..8e6fad613067 100644
+index 11b03d1cbe..8e6fad6130 100644
 --- a/lib/Makefile
 +++ b/lib/Makefile
 @@ -9,6 +9,7 @@ obj-$(CONFIG_EFI) += efi/
@@ -2345,7 +2346,7 @@ index 11b03d1cbec8..8e6fad613067 100644
  obj-$(CONFIG_TIZEN) += tizen/
 diff --git a/lib/arm-ffa/Kconfig b/lib/arm-ffa/Kconfig
 new file mode 100644
-index 000000000000..79acbc5a8fe3
+index 0000000000..79acbc5a8f
 --- /dev/null
 +++ b/lib/arm-ffa/Kconfig
 @@ -0,0 +1,6 @@
@@ -2357,7 +2358,7 @@ index 000000000000..79acbc5a8fe3
 +	  pass the data and the FF-A function ID to the low level driver
 diff --git a/lib/arm-ffa/Makefile b/lib/arm-ffa/Makefile
 new file mode 100644
-index 000000000000..c30c0f398126
+index 0000000000..c30c0f3981
 --- /dev/null
 +++ b/lib/arm-ffa/Makefile
 @@ -0,0 +1,8 @@
@@ -2371,7 +2372,7 @@ index 000000000000..c30c0f398126
 +obj-y += arm_ffa_helper.o
 diff --git a/lib/arm-ffa/arm_ffa_helper.c b/lib/arm-ffa/arm_ffa_helper.c
 new file mode 100644
-index 000000000000..623899d38044
+index 0000000000..623899d380
 --- /dev/null
 +++ b/lib/arm-ffa/arm_ffa_helper.c
 @@ -0,0 +1,188 @@
@@ -2564,7 +2565,7 @@ index 000000000000..623899d38044
 +	return 0;
 +}
 diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index 5bcb8253edba..cffa2c69d621 100644
+index 5bcb8253ed..cffa2c69d6 100644
 --- a/lib/efi_loader/efi_boottime.c
 +++ b/lib/efi_loader/efi_boottime.c
 @@ -23,6 +23,10 @@
@@ -2605,6 +2606,3 @@ index 5bcb8253edba..cffa2c69d621 100644
  	/* Patch out unsupported runtime function */
  	efi_runtime_detach();
  
--- 
-2.30.2
-

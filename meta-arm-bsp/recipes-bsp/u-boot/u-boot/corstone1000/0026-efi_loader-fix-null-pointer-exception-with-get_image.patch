@@ -1,8 +1,7 @@
-From 2da8554ab732c59c7ca624ac4b16412fa9c2e39c Mon Sep 17 00:00:00 2001
+From 9c95ba30395455ee73dde4c73856a1b05b40a6f7 Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Fri, 14 Jan 2022 15:24:18 +0000
-Subject: [PATCH 26/27] efi_loader: fix null pointer exception with
- get_image_info
+Subject: [PATCH] efi_loader: fix null pointer exception with get_image_info
 
 get_img_info API implemented for corstone1000 target does not
 check the input attributes and as a result uboot crash's with
@@ -11,12 +10,13 @@ exception.
 
 Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  lib/efi_loader/efi_firmware.c | 19 +++++++++++--------
  1 file changed, 11 insertions(+), 8 deletions(-)
 
 diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 477ad072070e..f99c57fde576 100644
+index 477ad07207..f99c57fde5 100644
 --- a/lib/efi_loader/efi_firmware.c
 +++ b/lib/efi_loader/efi_firmware.c
 @@ -347,26 +347,29 @@ static efi_status_t efi_corstone1000_img_info_get (
@@ -57,6 +57,3 @@ index 477ad072070e..f99c57fde576 100644
  	image_info[i].attributes_supported = IMAGE_ATTRIBUTE_IMAGE_UPDATABLE |
  					     IMAGE_ATTRIBUTE_AUTHENTICATION_REQUIRED;
  	image_info[i].attributes_setting = IMAGE_ATTRIBUTE_IMAGE_UPDATABLE;
--- 
-2.30.2
-

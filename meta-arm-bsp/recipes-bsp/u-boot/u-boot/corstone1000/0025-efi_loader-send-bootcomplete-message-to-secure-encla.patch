@@ -1,7 +1,7 @@
-From af2defbfaffa4264052e30f269b91794068e4773 Mon Sep 17 00:00:00 2001
+From 9aacd7326d8543e46c33d0637f6594947274c27c Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Wed, 5 Jan 2022 17:56:09 +0000
-Subject: [PATCH 25/27] efi_loader: send bootcomplete message to secure enclave
+Subject: [PATCH] efi_loader: send bootcomplete message to secure enclave
 
 On corstone1000 platform, Secure Enclave will be expecting
 an event from uboot when it performs capsule update. Previously,
@@ -11,6 +11,7 @@ to send an uboot efi initialized event at efi sub-system initialization
 stage.
 
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  include/configs/corstone1000.h |  2 +-
  lib/efi_loader/efi_boottime.c  | 49 ----------------------------------
@@ -19,7 +20,7 @@ Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
  4 files changed, 50 insertions(+), 51 deletions(-)
 
 diff --git a/include/configs/corstone1000.h b/include/configs/corstone1000.h
-index a7445e61348b..06b605e43bdf 100644
+index a7445e6134..06b605e43b 100644
 --- a/include/configs/corstone1000.h
 +++ b/include/configs/corstone1000.h
 @@ -22,7 +22,7 @@
@@ -32,7 +33,7 @@ index a7445e61348b..06b605e43bdf 100644
  #define PREP_SEPROXY_SVC_ID_MASK	GENMASK(31, 16)
  #define PREP_SEPROXY_SVC_ID(x)	 (FIELD_PREP(PREP_SEPROXY_SVC_ID_MASK, (x)))
 diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index b58a8c98fd05..d0703060491b 100644
+index b58a8c98fd..d070306049 100644
 --- a/lib/efi_loader/efi_boottime.c
 +++ b/lib/efi_loader/efi_boottime.c
 @@ -2101,46 +2101,6 @@ static void efi_exit_caches(void)
@@ -99,7 +100,7 @@ index b58a8c98fd05..d0703060491b 100644
  	efi_set_watchdog(0);
  	WATCHDOG_RESET();
 diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 9eb89849b28d..477ad072070e 100644
+index 9eb89849b2..477ad07207 100644
 --- a/lib/efi_loader/efi_firmware.c
 +++ b/lib/efi_loader/efi_firmware.c
 @@ -356,7 +356,7 @@ static efi_status_t efi_corstone1000_img_info_get (
@@ -112,7 +113,7 @@ index 9eb89849b28d..477ad072070e 100644
  	}
  
 diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index 989380d4f8cd..515a0bdf74ef 100644
+index 989380d4f8..515a0bdf74 100644
 --- a/lib/efi_loader/efi_setup.c
 +++ b/lib/efi_loader/efi_setup.c
 @@ -17,6 +17,9 @@
@@ -186,6 +187,3 @@ index 989380d4f8cd..515a0bdf74ef 100644
  	ret = efi_corstone1000_alloc_capsule_shared_buf();
  	if (ret != EFI_SUCCESS) {
  		printf("EFI: Corstone-1000: cannot allocate caspsule shared buffer\n");
--- 
-2.30.2
-

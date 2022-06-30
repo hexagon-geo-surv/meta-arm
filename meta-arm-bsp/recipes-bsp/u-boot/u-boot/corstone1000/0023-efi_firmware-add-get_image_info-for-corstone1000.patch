@@ -1,22 +1,22 @@
-From 34fadec4f659248a6020676f5894895977ccf79d Mon Sep 17 00:00:00 2001
+From 60e35817e102d0185af908db91935379a79d18ae Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Fri, 17 Dec 2021 19:50:25 +0000
-Subject: [PATCH 23/27] efi_firmware: add get_image_info for corstone1000
+Subject: [PATCH] efi_firmware: add get_image_info for corstone1000
 
 This change is to populate get_image_info which eventually
 will be populated in ESRT table
 
 Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
 
-%% original patch: 0047-efi_firmware-add-get_image_info-for-corstone1000.patch
 
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  lib/efi_loader/efi_firmware.c | 64 ++++++++++++++++++++++++++++++++++-
  1 file changed, 63 insertions(+), 1 deletion(-)
 
 diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index a5ff32f121f4..9eb89849b28d 100644
+index a5ff32f121..9eb89849b2 100644
 --- a/lib/efi_loader/efi_firmware.c
 +++ b/lib/efi_loader/efi_firmware.c
 @@ -241,6 +241,7 @@ const efi_guid_t efi_firmware_image_type_uboot_fit =
@@ -116,6 +116,3 @@ index a5ff32f121f4..9eb89849b28d 100644
  	if (dfu_write_by_alt(image_index - 1, (void *)image, image_size,
  			     NULL, NULL))
  		return EFI_EXIT(EFI_DEVICE_ERROR);
--- 
-2.30.2
-

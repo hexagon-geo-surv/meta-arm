@@ -1,7 +1,7 @@
-From 424d186ab0a0c4dd62dfb13ac87e8d1fd26c101e Mon Sep 17 00:00:00 2001
+From 4cf520c555863de34ecff01f9ee4cb150a01f98f Mon Sep 17 00:00:00 2001
 From: Anders Dellien <anders.dellien@arm.com>
 Date: Thu, 23 Jul 2020 17:32:55 +0100
-Subject: [PATCH 1/2] Add vexpress_aemv8a_aarch32 variant
+Subject: [PATCH] Add vexpress_aemv8a_aarch32 variant
 
 The ARM AEMv8 FVP model can be run in Aarch64 or Aarch32 mode. Aarch32
 support is enable per-CPU when launching the model, eg:
@@ -21,6 +21,7 @@ https://www.mail-archive.com/u-boot@lists.denx.de/msg233429.html
 Signed-off-by: Ryan Harkin <ryan.harkin@linaro.org>
 Signed-off-by: Asha R <asha.r@arm.com>
 Signed-off-by: Anders Dellien <anders.dellien@arm.com>
+
 ---
  arch/arm/Kconfig                          |  5 +++
  board/armltd/vexpress64/Kconfig           |  2 +-
@@ -30,7 +31,7 @@ Signed-off-by: Anders Dellien <anders.dellien@arm.com>
  create mode 100644 configs/vexpress_aemv8a_aarch32_defconfig
 
 diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 4567c183fb84..99cc414d6760 100644
+index 4567c183fb..99cc414d67 100644
 --- a/arch/arm/Kconfig
 +++ b/arch/arm/Kconfig
 @@ -1250,6 +1250,11 @@ config TARGET_VEXPRESS64_BASE_FVP
@@ -46,7 +47,7 @@ index 4567c183fb84..99cc414d6760 100644
  	bool "Support Versatile Express Juno Development Platform"
  	select ARM64
 diff --git a/board/armltd/vexpress64/Kconfig b/board/armltd/vexpress64/Kconfig
-index 4aab3f092ecb..0a5e3fcc004a 100644
+index 4aab3f092e..0a5e3fcc00 100644
 --- a/board/armltd/vexpress64/Kconfig
 +++ b/board/armltd/vexpress64/Kconfig
 @@ -1,4 +1,4 @@
@@ -57,7 +58,7 @@ index 4aab3f092ecb..0a5e3fcc004a 100644
  	default "vexpress64"
 diff --git a/configs/vexpress_aemv8a_aarch32_defconfig b/configs/vexpress_aemv8a_aarch32_defconfig
 new file mode 100644
-index 000000000000..9c5c3367ec4d
+index 0000000000..9c5c3367ec
 --- /dev/null
 +++ b/configs/vexpress_aemv8a_aarch32_defconfig
 @@ -0,0 +1,40 @@
@@ -102,7 +103,7 @@ index 000000000000..9c5c3367ec4d
 +CONFIG_OF_LIBFDT=y
 +CONFIG_REMAKE_ELF=y
 diff --git a/include/configs/vexpress_aemv8.h b/include/configs/vexpress_aemv8.h
-index f0c5ceb3849a..854fbb41bfc1 100644
+index f0c5ceb384..854fbb41bf 100644
 --- a/include/configs/vexpress_aemv8.h
 +++ b/include/configs/vexpress_aemv8.h
 @@ -86,7 +86,7 @@
@@ -179,6 +180,3 @@ index f0c5ceb3849a..854fbb41bfc1 100644
  #endif
  
  /* Monitor Command Prompt */
--- 
-2.30.2
-

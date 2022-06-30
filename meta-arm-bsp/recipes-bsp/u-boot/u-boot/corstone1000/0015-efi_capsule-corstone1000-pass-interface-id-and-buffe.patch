@@ -1,8 +1,8 @@
-From 81bf9ed7e8e858cef13cfc3d1435c44445e523df Mon Sep 17 00:00:00 2001
+From c7fb3b79b1efe3322949790aefb9e48f02e5107e Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Fri, 10 Dec 2021 20:03:35 +0000
-Subject: [PATCH 15/27] efi_capsule: corstone1000: pass interface id and buffer
- event id using register w4
+Subject: [PATCH] efi_capsule: corstone1000: pass interface id and buffer event
+ id using register w4
 
 Initially the interface/event IDs are passed to the SP using register
 w3 and w5.
@@ -16,13 +16,14 @@ firmware update.
 Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  include/configs/corstone1000.h |  6 ++++++
  lib/efi_loader/efi_capsule.c   | 11 +++++++----
  2 files changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/include/configs/corstone1000.h b/include/configs/corstone1000.h
-index db0f91335cef..a7445e61348b 100644
+index db0f91335c..a7445e6134 100644
 --- a/include/configs/corstone1000.h
 +++ b/include/configs/corstone1000.h
 @@ -24,6 +24,12 @@
@@ -39,7 +40,7 @@ index db0f91335cef..a7445e61348b 100644
  #define CORSTONE1000_CAPSULE_BUFFER_SIZE	(8192) /* 32 MB */
  
 diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index c100c1b95298..17d769803b2a 100644
+index c100c1b952..17d769803b 100644
 --- a/lib/efi_loader/efi_capsule.c
 +++ b/lib/efi_loader/efi_capsule.c
 @@ -27,6 +27,8 @@
@@ -68,6 +69,3 @@ index c100c1b95298..17d769803b2a 100644
  
  	func_data.data1_size = sizeof(msg);
  	func_data.data1 = &msg;
--- 
-2.30.2
-

@@ -1,7 +1,7 @@
-From e70d0128090158872847b82b82cdbcf0e2f13885 Mon Sep 17 00:00:00 2001
+From 489e464433b763ee562a92e8c3b8ea25ec043ee0 Mon Sep 17 00:00:00 2001
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Date: Thu, 11 Nov 2021 16:27:59 +0000
-Subject: [PATCH 11/27] efi: corstone1000: introduce EFI capsule update
+Subject: [PATCH] efi: corstone1000: introduce EFI capsule update
 
 This commit provides capsule update feature for Corstone1000.
 
@@ -20,6 +20,7 @@ SE Proxy FW update service. This event is generated on each boot.
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  include/configs/corstone1000.h |  18 +++++
  include/efi_loader.h           |   4 +-
@@ -29,7 +30,7 @@ Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
  5 files changed, 215 insertions(+), 4 deletions(-)
 
 diff --git a/include/configs/corstone1000.h b/include/configs/corstone1000.h
-index afc9ccfc192b..a400cdef69d0 100644
+index afc9ccfc19..a400cdef69 100644
 --- a/include/configs/corstone1000.h
 +++ b/include/configs/corstone1000.h
 @@ -14,6 +14,24 @@
@@ -58,7 +59,7 @@ index afc9ccfc192b..a400cdef69d0 100644
  #define MM_SP_UUID_DATA	\
  	0xed, 0x32, 0xd5, 0x33,	\
 diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 126db279dd3e..01b432e6184b 100644
+index 126db279dd..01b432e618 100644
 --- a/include/efi_loader.h
 +++ b/include/efi_loader.h
 @@ -965,11 +965,11 @@ extern const struct efi_firmware_management_protocol efi_fmp_fit;
@@ -76,7 +77,7 @@ index 126db279dd3e..01b432e6184b 100644
  		efi_uintn_t capsule_count,
  		u64 *maximum_capsule_size,
 diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index cffa2c69d621..5c77a40c3ebe 100644
+index cffa2c69d6..5c77a40c3e 100644
 --- a/lib/efi_loader/efi_boottime.c
 +++ b/lib/efi_loader/efi_boottime.c
 @@ -2096,6 +2096,44 @@ static void efi_exit_caches(void)
@@ -141,7 +142,7 @@ index cffa2c69d621..5c77a40c3ebe 100644
  	efi_set_watchdog(0);
  	WATCHDOG_RESET();
 diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index f00440163d41..c100c1b95298 100644
+index f00440163d..c100c1b952 100644
 --- a/lib/efi_loader/efi_capsule.c
 +++ b/lib/efi_loader/efi_capsule.c
 @@ -24,6 +24,14 @@
@@ -322,7 +323,7 @@ index f00440163d41..c100c1b95298 100644
  		efi_uintn_t capsule_count,
  		u64 *maximum_capsule_size,
 diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index eee54e48784f..989380d4f8cd 100644
+index eee54e4878..989380d4f8 100644
 --- a/lib/efi_loader/efi_setup.c
 +++ b/lib/efi_loader/efi_setup.c
 @@ -16,6 +16,13 @@
@@ -354,6 +355,3 @@ index eee54e48784f..989380d4f8cd 100644
  	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_UPDATE)) {
  		ret = efi_set_variable_int(u"CapsuleMax",
  					   &efi_guid_capsule_report,
--- 
-2.30.2
-

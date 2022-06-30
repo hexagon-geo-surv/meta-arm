@@ -1,7 +1,7 @@
-From 11a86f5a8c63b4b42dd976ab66c9abfaa4dce1cc Mon Sep 17 00:00:00 2001
+From 42a485721582ec13e066cae31b813dbe72113f20 Mon Sep 17 00:00:00 2001
 From: Peter Hoyes <Peter.Hoyes@arm.com>
 Date: Thu, 17 Feb 2022 17:02:34 +0000
-Subject: [PATCH 7/8] vexpress64: Configure memory using device tree
+Subject: [PATCH] vexpress64: Configure memory using device tree
 
 The memory size and memory banks were previously configured statically,
 using #defines in the vexpress header file, which could conflict with
@@ -14,6 +14,7 @@ Upstream-Status: Inappropriate [other]
   Implementation pending further discussion
 Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
 Change-Id: I4add8258cb99dac87f078435272410b562b6fdc7
+
 ---
  board/armltd/vexpress64/vexpress64.c | 14 ++------------
  include/configs/vexpress_aemv8.h     | 17 -----------------
@@ -83,6 +84,3 @@ index dbf6f04230..85a9fcc198 100644
  /* Enable memtest */
  
  /* Initial environment variables */
--- 
-2.25.1
-

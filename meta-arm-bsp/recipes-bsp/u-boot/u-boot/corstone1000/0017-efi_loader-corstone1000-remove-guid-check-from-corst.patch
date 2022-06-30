@@ -1,20 +1,21 @@
-From c463798489e41725f8ba33debeedc7c4011cda38 Mon Sep 17 00:00:00 2001
+From 9204921f2550eb3b1adf66ebd5e5917a2370c7d8 Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Sat, 11 Dec 2021 13:23:55 +0000
-Subject: [PATCH 17/27] efi_loader: corstone1000: remove guid check from
- corstone1000 config option
+Subject: [PATCH] efi_loader: corstone1000: remove guid check from corstone1000
+ config option
 
 Use generic fmp guid and no separte check is required for
 CORSTONE1000 target.
 
 Signed-off-by: Vishnu Banavath <vishnu.banavath@arm.com>
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+
 ---
  lib/efi_loader/efi_capsule.c | 16 +---------------
  1 file changed, 1 insertion(+), 15 deletions(-)
 
 diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 17d769803b2a..939040d2755e 100644
+index 17d769803b..939040d275 100644
 --- a/lib/efi_loader/efi_capsule.c
 +++ b/lib/efi_loader/efi_capsule.c
 @@ -654,12 +654,6 @@ efi_status_t __efi_runtime EFIAPI efi_update_capsule(
@@ -47,6 +48,3 @@ index 17d769803b2a..939040d2755e 100644
  		if (ret != EFI_SUCCESS)
  			goto out;
  	}
--- 
-2.30.2
-
