@@ -1,7 +1,7 @@
-From 73c319a1096259652853fa2538a733a8ebea96a8 Mon Sep 17 00:00:00 2001
+From 52a595c010f8f9b90f30cc7735bda81b5182fbc1 Mon Sep 17 00:00:00 2001
 From: Rui Miguel Silva <rui.silva@linaro.org>
 Date: Wed, 8 Jan 2020 09:48:11 +0000
-Subject: [PATCH 2/2] board: arm: add corstone500 board
+Subject: [PATCH] board: arm: add corstone500 board
 
 Upstream-Status: Pending [Not submitted to upstream yet]
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
@@ -12,7 +12,7 @@ makefile for this system.
 
 Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
 
-%% original patch: 0002-board-arm-add-corstone500-board.patch
+
 ---
  arch/arm/Kconfig                       |  10 +++
  board/armltd/corstone500/Kconfig       |  12 +++
@@ -302,6 +302,3 @@ index 0000000000..93c397d2f5
 +#define FLASH_MAX_SECTOR_SI		0x00040000
 +#define CONFIG_ENV_IS_IN_FLASH		1
 +#endif
--- 
-2.30.2
-

@@ -1,7 +1,7 @@
-From e896d48c57d272327410416887f34ac0db550390 Mon Sep 17 00:00:00 2001
+From 2b07ef5d4e7550082f12ec7e34768b00bdb52d8d Mon Sep 17 00:00:00 2001
 From: Jon Mason <jdmason@kudzu.us>
 Date: Mon, 13 Jun 2022 10:59:53 -0400
-Subject: [PATCH 2/2] Revert "vexpress64: Enable OF_CONTROL and OF_BOARD for
+Subject: [PATCH] Revert "vexpress64: Enable OF_CONTROL and OF_BOARD for
  VExpress64"
 
 This patch only works for aarch64 (as the 'x' registers are not
@@ -15,6 +15,7 @@ Upstream-Status: Inappropriate
 Signed-off-by: Jon Mason <jon.mason@arm.com>
 
 This reverts commit 2661397464e47d45cd25bbc5e6b9de7594b3268d.
+
 ---
  board/armltd/vexpress64/Makefile        |  2 +-
  board/armltd/vexpress64/lowlevel_init.S | 12 ------------
@@ -23,7 +24,7 @@ This reverts commit 2661397464e47d45cd25bbc5e6b9de7594b3268d.
  delete mode 100644 board/armltd/vexpress64/lowlevel_init.S
 
 diff --git a/board/armltd/vexpress64/Makefile b/board/armltd/vexpress64/Makefile
-index 1878fbed4ec9..868dc4f629f2 100644
+index 1878fbed4e..868dc4f629 100644
 --- a/board/armltd/vexpress64/Makefile
 +++ b/board/armltd/vexpress64/Makefile
 @@ -3,5 +3,5 @@
@@ -35,7 +36,7 @@ index 1878fbed4ec9..868dc4f629f2 100644
  obj-$(CONFIG_TARGET_VEXPRESS64_JUNO)	+= pcie.o
 diff --git a/board/armltd/vexpress64/lowlevel_init.S b/board/armltd/vexpress64/lowlevel_init.S
 deleted file mode 100644
-index 3dcfb85d0e9a..000000000000
+index 3dcfb85d0e..0000000000
 --- a/board/armltd/vexpress64/lowlevel_init.S
 +++ /dev/null
 @@ -1,12 +0,0 @@
@@ -52,7 +53,7 @@ index 3dcfb85d0e9a..000000000000
 -
 -	b	save_boot_params_ret
 diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress64/vexpress64.c
-index 5e22e89824ee..cedab86d984b 100644
+index 5e22e89824..cedab86d98 100644
 --- a/board/armltd/vexpress64/vexpress64.c
 +++ b/board/armltd/vexpress64/vexpress64.c
 @@ -92,15 +92,7 @@ int dram_init_banksize(void)
@@ -106,6 +107,3 @@ index 5e22e89824ee..cedab86d984b 100644
  }
  #endif
  
--- 
-2.30.2
-

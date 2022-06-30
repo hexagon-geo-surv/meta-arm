@@ -1,8 +1,7 @@
-From 995a9daf6fd1e6375d2492cb821d24481141731b Mon Sep 17 00:00:00 2001
+From 59bd7dbe57eddd67ee59d885707b6b0bbbce0a32 Mon Sep 17 00:00:00 2001
 From: Peter Hoyes <Peter.Hoyes@arm.com>
 Date: Fri, 10 Dec 2021 16:37:26 +0000
-Subject: [PATCH 5/8] armv8: Make disabling HVC configurable when switching to
- EL1
+Subject: [PATCH] armv8: Make disabling HVC configurable when switching to EL1
 
 On the BASER_FVP there is no EL3, so HVC is used to provide PSCI
 services. Therefore we cannot disable hypercalls.
@@ -15,6 +14,7 @@ Upstream-Status: Inappropriate [other]
   Implementation pending further discussion
 Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
 Change-Id: I463d82f1db8a3cafcab40a9c0c208753569cc300
+
 ---
  arch/arm/cpu/armv8/Kconfig        |  9 +++++++++
  arch/arm/include/asm/macro.h      | 10 ++++++++--
@@ -78,6 +78,3 @@ index dff1836da2..a1522c48b5 100644
  CONFIG_ARMV8_EXCEPTION_VECTORS=n
  CONFIG_ARMV8_SWITCH_TO_EL1=y
 +CONFIG_ARMV8_DISABLE_HVC=n
--- 
-2.25.1
-

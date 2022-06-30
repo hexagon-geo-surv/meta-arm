@@ -1,7 +1,7 @@
-From 4d22ed70639c2d0c9c537efd549e563d4856305b Mon Sep 17 00:00:00 2001
+From d15bb15637e32315427c4ffb1564d3f7c6ebe97d Mon Sep 17 00:00:00 2001
 From: Peter Hoyes <Peter.Hoyes@arm.com>
 Date: Wed, 26 May 2021 17:41:10 +0100
-Subject: [PATCH 2/8] armv8: Add ARMv8 MPU configuration logic
+Subject: [PATCH] armv8: Add ARMv8 MPU configuration logic
 
 Detect whether an MMU is present at the current exception level. If
 not, initialize the MPU instead of the MMU during init, and clear the
@@ -19,6 +19,7 @@ Upstream-Status: Inappropriate [other]
   Implementation pending further discussion
 Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
 Change-Id: I0ee3879f9d7f03fe940664b3551c68eeaa458d17
+
 ---
  arch/arm/cpu/armv8/cache_v8.c    | 101 ++++++++++++++++++++++++++++++-
  arch/arm/include/asm/armv8/mpu.h |  59 ++++++++++++++++++
@@ -254,6 +255,3 @@ index f75eea16b3..e4f5b4e4bc 100644
  /*
   * ID_AA64PFR0_EL1 bits definitions
   */
--- 
-2.25.1
-

@@ -1,4 +1,4 @@
-From f7c24393604e45012447b16aaa95eb5e7224ba07 Mon Sep 17 00:00:00 2001
+From 803e3cd5ba59cce6cb0646af02f7eacc081975ad Mon Sep 17 00:00:00 2001
 From: Arunachalam Ganapathy <arunachalam.ganapathy@arm.com>
 Date: Tue, 12 Apr 2022 12:43:49 +0100
 Subject: [PATCH] arm: total_compute: update secure dram size
@@ -9,12 +9,13 @@ secure partitions.
 Signed-off-by: Arunachalam Ganapathy <arunachalam.ganapathy@arm.com>
 Change-Id: Id8ce99c7a5330d3c28d473009c4db04141e6fa4d
 Upstream-Status: Pending [Not submitted to upstream yet]
+
 ---
  include/configs/total_compute.h | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/include/configs/total_compute.h b/include/configs/total_compute.h
-index 0324b1e1b217..62bdb4f6a3ae 100644
+index 0324b1e1b2..62bdb4f6a3 100644
 --- a/include/configs/total_compute.h
 +++ b/include/configs/total_compute.h
 @@ -23,8 +23,8 @@
@@ -28,6 +29,3 @@ index 0324b1e1b217..62bdb4f6a3ae 100644
  #define PHYS_SDRAM_1_SIZE	0x80000000 - DRAM_SEC_SIZE
  #define CONFIG_SYS_SDRAM_BASE	PHYS_SDRAM_1
  
--- 
-2.30.2
-
