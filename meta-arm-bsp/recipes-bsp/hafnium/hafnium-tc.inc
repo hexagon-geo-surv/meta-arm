@@ -16,7 +16,7 @@ SRC_URI:append = " \
         file://0003-fix-ff-a-Add-FFA_SECONDARY_EP_REGISTER_64-to-list-of.patch \
         file://0004-feat-emulate-interrupt-controller-register-access.patch \
         file://0005-Revert-fix-ff-a-check-receiver-s-attributes-on-memor.patch \
-        file://0006-tc-increase-heap-pages.patch \
+        file://0006-tc-increase-heap-pages.patch;patchdir=project/reference \
         "
 
 do_compile() {

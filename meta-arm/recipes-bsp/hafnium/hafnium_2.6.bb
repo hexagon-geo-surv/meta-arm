@@ -12,8 +12,9 @@ inherit deploy python3native pkgconfig
 SRC_URI = "gitsm://git.trustedfirmware.org/hafnium/hafnium.git;protocol=https;branch=master \
            file://0001-define-_Noreturn-if-needed.patch \
            file://host-ld.patch \
-           file://pkg-config-native.patch \
-           file://native-dtc.patch"
+           file://pkg-config-native.patch;patchdir=third_party/linux \
+           file://native-dtc.patch \
+           "
 SRCREV = "55b74f893948dd08d2782dd8fa9e903c143a6704"
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"

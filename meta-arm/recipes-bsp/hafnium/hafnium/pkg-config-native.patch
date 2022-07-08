@@ -5,8 +5,8 @@ Signed-off-by: Ross Burton <ross.burton@arm.com>
 
 diff --git a/scripts/Makefile b/scripts/Makefile
 index b4b7d8b58..26a5160ee 100644
---- a/third_party/linux/scripts/Makefile
-+++ b/third_party/linux/scripts/Makefile
+--- a/scripts/Makefile
++++ b/scripts/Makefile
 @@ -10,8 +10,8 @@
 
  HOST_EXTRACFLAGS += -I$(srctree)/tools/include
