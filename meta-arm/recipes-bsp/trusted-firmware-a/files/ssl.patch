@@ -1,4 +1,7 @@
-fiptool: respect OPENSSL_DIR
+From 99a1c06ca9a1191bc88cd7dd3c332c2bb112534c Mon Sep 17 00:00:00 2001
+From: Ross Burton <ross.burton@arm.com>
+Date: Mon, 25 Oct 2021 16:42:06 +0100
+Subject: [PATCH] fiptool: respect OPENSSL_DIR
 
 fiptool links to libcrypto, so as with the other tools it should respect
 OPENSSL_DIR for include/library paths.
@@ -6,11 +9,16 @@ OPENSSL_DIR for include/library paths.
 Upstream-Status: Submitted
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 
+---
+ Makefile               | 2 +-
+ tools/fiptool/Makefile | 6 ++++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
 diff --git a/Makefile b/Makefile
-index ec6f88585..2d3b9fc26 100644
+index 73007b413..fd60b5fba 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1388,7 +1388,7 @@ fwu_fip: ${BUILD_PLAT}/${FWU_FIP_NAME}
+@@ -1427,7 +1427,7 @@ fwu_fip: ${BUILD_PLAT}/${FWU_FIP_NAME}
  
  ${FIPTOOL}: FORCE
  ifdef UNIX_MK
