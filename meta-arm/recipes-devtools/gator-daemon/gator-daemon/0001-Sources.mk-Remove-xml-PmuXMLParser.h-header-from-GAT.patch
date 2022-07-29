@@ -1,4 +1,4 @@
-From 6f62c77f0a51de17b7f81f225ef483ed8214640e Mon Sep 17 00:00:00 2001
+From ea9a30701b62262b71be0cde9321725b16be4452 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sat, 26 Jun 2021 14:19:10 -0700
 Subject: [PATCH] Sources.mk: Remove xml/PmuXMLParser.h header from
@@ -12,6 +12,7 @@ specified with -o and bails out
 
 Upstream-Status: Backport [https://github.com/ARM-software/gator/commit/6ef311882a56e14c189d70c4d72945dd95e9b88e]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  daemon/Sources.mk | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
@@ -27,6 +28,3 @@ index 60d15ef..3e679f5 100644
 -    xml/PmuXMLParser.cpp \
 -    xml/PmuXMLParser.h
 +    xml/PmuXMLParser.cpp
--- 
-2.32.0
-
