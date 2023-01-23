@@ -220,6 +220,7 @@ qemuarm-secureboot:
       - KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
         TOOLCHAINS: [gcc, clang]
         TCLIBC: [glibc, musl]
+        TS: [none, trusted-services]
         TESTING: testimage
       - TOOLCHAINS: external-gccarm
         TESTING: testimage
