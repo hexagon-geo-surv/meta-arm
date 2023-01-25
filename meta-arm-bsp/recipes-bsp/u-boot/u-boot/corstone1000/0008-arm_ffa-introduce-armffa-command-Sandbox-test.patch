@@ -1,7 +1,7 @@
-From 5507189fe37f1243d685c59ea52fa5643d3cc50c Mon Sep 17 00:00:00 2001
+From 9fa4e1bffe800e437da6e30fba1772efcac73742 Mon Sep 17 00:00:00 2001
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Date: Tue, 29 Nov 2022 14:48:34 +0000
-Subject: [PATCH 08/25] arm_ffa: introduce armffa command Sandbox test
+Subject: [PATCH] arm_ffa: introduce armffa command Sandbox test
 
 Add Sandbox test for the armffa command
 
@@ -26,10 +26,10 @@ v1: introduce armffa command sandbox test
  create mode 100644 test/cmd/armffa.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index e682db8d8f..72f01769c9 100644
+index c1d3d4ae1c56..a2f60a3b93a6 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -256,6 +256,7 @@ F:	doc/arch/arm64.ffa.rst
+@@ -272,6 +272,7 @@ F:	doc/arch/arm64.ffa.rst
  F:	drivers/firmware/arm-ffa/
  F:	include/arm_ffa.h
  F:	include/sandbox_arm_ffa.h
@@ -38,7 +38,7 @@ index e682db8d8f..72f01769c9 100644
  
  ARM FREESCALE IMX
 diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index c331757425..19e9d0a995 100644
+index bc961df3dcee..96a9084825bd 100644
 --- a/test/cmd/Makefile
 +++ b/test/cmd/Makefile
 @@ -1,6 +1,7 @@
@@ -49,14 +49,17 @@ index c331757425..19e9d0a995 100644
  
  ifdef CONFIG_HUSH_PARSER
  obj-$(CONFIG_CONSOLE_RECORD) += test_echo.o
-@@ -13,3 +14,4 @@ obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
+@@ -13,6 +14,7 @@ obj-$(CONFIG_CMD_ADDRMAP) += addrmap.o
+ obj-$(CONFIG_CMD_FDT) += fdt.o
+ obj-$(CONFIG_CONSOLE_TRUETYPE) += font.o
+ obj-$(CONFIG_CMD_LOADM) += loadm.o
++obj-$(CONFIG_SANDBOX_FFA) += armffa.o
+ obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
  obj-$(CONFIG_CMD_PINMUX) += pinmux.o
  obj-$(CONFIG_CMD_PWM) += pwm.o
- obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
-+obj-$(CONFIG_SANDBOX_FFA) += armffa.o
 diff --git a/test/cmd/armffa.c b/test/cmd/armffa.c
 new file mode 100644
-index 0000000000..e04363ba63
+index 000000000000..e04363ba63f9
 --- /dev/null
 +++ b/test/cmd/armffa.c
 @@ -0,0 +1,39 @@
@@ -99,6 +102,3 @@ index 0000000000..e04363ba63
 +}
 +
 +DM_TEST(dm_test_armffa_cmd, UT_TESTF_SCAN_FDT | UT_TESTF_CONSOLE_REC);
--- 
-2.17.1
-

@@ -1,4 +1,4 @@
-From f7c24393604e45012447b16aaa95eb5e7224ba07 Mon Sep 17 00:00:00 2001
+From 8280e2ae52fabef99341ac249e6495a4b4e963b8 Mon Sep 17 00:00:00 2001
 From: Arunachalam Ganapathy <arunachalam.ganapathy@arm.com>
 Date: Tue, 12 Apr 2022 12:43:49 +0100
 Subject: [PATCH] arm: total_compute: update secure dram size
@@ -14,10 +14,10 @@ Upstream-Status: Pending [Not submitted to upstream yet]
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/include/configs/total_compute.h b/include/configs/total_compute.h
-index 0324b1e1b217..62bdb4f6a3ae 100644
+index ab6cd0633215..f759b69b040a 100644
 --- a/include/configs/total_compute.h
 +++ b/include/configs/total_compute.h
-@@ -23,8 +23,8 @@
+@@ -20,8 +20,8 @@
  
  /* Physical Memory Map */
  #define PHYS_SDRAM_1		0x80000000
@@ -28,6 +28,3 @@ index 0324b1e1b217..62bdb4f6a3ae 100644
  #define PHYS_SDRAM_1_SIZE	0x80000000 - DRAM_SEC_SIZE
  #define CONFIG_SYS_SDRAM_BASE	PHYS_SDRAM_1
  
--- 
-2.30.2
-

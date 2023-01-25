@@ -1,7 +1,7 @@
-From 424d186ab0a0c4dd62dfb13ac87e8d1fd26c101e Mon Sep 17 00:00:00 2001
+From e98acc643911391c847c4403289c4ef1ab2c5661 Mon Sep 17 00:00:00 2001
 From: Anders Dellien <anders.dellien@arm.com>
 Date: Thu, 23 Jul 2020 17:32:55 +0100
-Subject: [PATCH 1/2] Add vexpress_aemv8a_aarch32 variant
+Subject: [PATCH] Add vexpress_aemv8a_aarch32 variant
 
 The ARM AEMv8 FVP model can be run in Aarch64 or Aarch32 mode. Aarch32
 support is enable per-CPU when launching the model, eg:
@@ -22,61 +22,77 @@ Signed-off-by: Ryan Harkin <ryan.harkin@linaro.org>
 Signed-off-by: Asha R <asha.r@arm.com>
 Signed-off-by: Anders Dellien <anders.dellien@arm.com>
 ---
- arch/arm/Kconfig                          |  5 +++
- board/armltd/vexpress64/Kconfig           |  2 +-
- configs/vexpress_aemv8a_aarch32_defconfig | 40 ++++++++++++++++++
- include/configs/vexpress_aemv8.h          | 50 +++++++++++++++--------
- 4 files changed, 80 insertions(+), 17 deletions(-)
+ board/armltd/vexpress64/Kconfig           |  9 +++++
+ configs/vexpress_aemv8a_aarch32_defconfig | 40 +++++++++++++++++++++++
+ include/configs/vexpress_aemv8.h          |  3 +-
+ 3 files changed, 51 insertions(+), 1 deletion(-)
  create mode 100644 configs/vexpress_aemv8a_aarch32_defconfig
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 4567c183fb84..99cc414d6760 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1250,6 +1250,11 @@ config TARGET_VEXPRESS64_BASE_FVP
- 	select PL01X_SERIAL
- 	select SEMIHOSTING
- 
-+config TARGET_VEXPRESS64_BASE_FVP_AARCH32
-+        bool "Support Versatile Express ARMv8a 32-bit FVP BASE model"
-+        select CPU_V7A
-+        select SEMIHOSTING
-+
- config TARGET_VEXPRESS64_JUNO
- 	bool "Support Versatile Express Juno Development Platform"
- 	select ARM64
 diff --git a/board/armltd/vexpress64/Kconfig b/board/armltd/vexpress64/Kconfig
-index 4aab3f092ecb..0a5e3fcc004a 100644
+index c7adae0ea717..6648a146f0f1 100644
 --- a/board/armltd/vexpress64/Kconfig
 +++ b/board/armltd/vexpress64/Kconfig
-@@ -1,4 +1,4 @@
--if TARGET_VEXPRESS64_BASE_FVP || TARGET_VEXPRESS64_JUNO
-+if TARGET_VEXPRESS64_BASE_FVP || TARGET_VEXPRESS64_JUNO || TARGET_VEXPRESS64_BASE_FVP_AARCH32
+@@ -26,6 +26,12 @@ config TARGET_VEXPRESS64_BASE_FVP
+ 	select VEXPRESS64_BASE_MODEL
+ 	select OF_BOARD
  
- config SYS_BOARD
- 	default "vexpress64"
++config TARGET_VEXPRESS64_BASE_FVP_AARCH32
++	bool "Support Versatile Express ARMv8a 32-bit FVP BASE model"
++	select VEXPRESS64_BASE_MODEL
++	select OF_BOARD
++	select CPU_V7A
++
+ config TARGET_VEXPRESS64_BASER_FVP
+ 	bool "Support Versatile Express ARMv8r64 FVP BASE model"
+ 	select VEXPRESS64_BASE_MODEL
+@@ -58,12 +64,14 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+ 
+ config TEXT_BASE
+ 	default 0x88000000 if TARGET_VEXPRESS64_BASE_FVP
++	default 0x88000000 if TARGET_VEXPRESS64_BASE_FVP_AARCH32
+ 	default 0xe0000000 if TARGET_VEXPRESS64_JUNO
+ 	default 0x00001000 if TARGET_VEXPRESS64_BASER_FVP
+ 
+ config SYS_MALLOC_LEN
+ 	default 0x810000 if TARGET_VEXPRESS64_JUNO
+ 	default 0x840000 if TARGET_VEXPRESS64_BASE_FVP
++	default 0x840000 if TARGET_VEXPRESS64_BASE_FVP_AARCH32
+ 
+ config SYS_MALLOC_F_LEN
+ 	default 0x2000
+@@ -75,6 +83,7 @@ config SYS_LOAD_ADDR
+ config ENV_ADDR
+ 	default 0x0BFC0000 if TARGET_VEXPRESS64_JUNO
+ 	default 0x0FFC0000 if TARGET_VEXPRESS64_BASE_FVP
++	default 0x0FFC0000 if TARGET_VEXPRESS64_BASE_FVP_AARCH32
+ 	default 0x8FFC0000 if TARGET_VEXPRESS64_BASER_FVP
+ 
+ config ENV_SIZE
 diff --git a/configs/vexpress_aemv8a_aarch32_defconfig b/configs/vexpress_aemv8a_aarch32_defconfig
 new file mode 100644
-index 000000000000..9c5c3367ec4d
+index 000000000000..f9b5e7844113
 --- /dev/null
 +++ b/configs/vexpress_aemv8a_aarch32_defconfig
 @@ -0,0 +1,40 @@
 +CONFIG_ARM=y
-+CONFIG_SYS_ARCH_TIMER=y
-+CONFIG_TARGET_VEXPRESS64_BASE_FVP_AARCH32=y
-+CONFIG_SYS_TEXT_BASE=0x88000000
-+CONFIG_SYS_MALLOC_F_LEN=0x2000
++# CONFIG_INIT_SP_RELATIVE is not set
++# CONFIG_SYS_ARM_MMU is not set
++CONFIG_ARCH_VEXPRESS64=y
++CONFIG_SYS_MALLOC_LEN=0x400000
 +CONFIG_NR_DRAM_BANKS=2
++CONFIG_ENV_SIZE=0x1f000
++CONFIG_DM_GPIO=y
++CONFIG_SYS_PROMPT="fvp32# "
 +CONFIG_IDENT_STRING=" vexpress_aemv8a fvp aarch32"
++CONFIG_TARGET_VEXPRESS64_BASE_FVP_AARCH32=y
++# CONFIG_DISTRO_DEFAULTS is not set
 +CONFIG_REMAKE_ELF=y
-+CONFIG_SYS_LOAD_ADDR=0x90000000
 +CONFIG_BOOTDELAY=1
 +CONFIG_USE_BOOTARGS=y
 +CONFIG_BOOTARGS="console=ttyAMA0 earlycon=pl011,0x1c090000 debug user_debug=31 systemd.log_target=null root=/dev/vda1 rw androidboot.hardware=fvpbase rootwait loglevel=9"
 +# CONFIG_DISPLAY_CPUINFO is not set
 +# CONFIG_DISPLAY_BOARDINFO is not set
 +CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="fvp32# "
 +# CONFIG_CMD_CONSOLE is not set
 +CONFIG_CMD_BOOTZ=y
 +# CONFIG_CMD_XIMG is not set
@@ -84,6 +100,7 @@ index 000000000000..9c5c3367ec4d
 +# CONFIG_CMD_ENV_EXISTS is not set
 +CONFIG_CMD_MEMTEST=y
 +CONFIG_CMD_ARMFLASH=y
++CONFIG_CMD_DM=y
 +# CONFIG_CMD_LOADS is not set
 +# CONFIG_CMD_ITEST is not set
 +# CONFIG_CMD_SETEXPR is not set
@@ -93,92 +110,21 @@ index 000000000000..9c5c3367ec4d
 +CONFIG_CMD_PING=y
 +CONFIG_CMD_CACHE=y
 +CONFIG_CMD_FAT=y
-+CONFIG_DM=y
 +CONFIG_MTD_NOR_FLASH=y
 +CONFIG_FLASH_CFI_DRIVER=y
 +CONFIG_SYS_FLASH_CFI=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_PL01X_SERIAL=y
-+CONFIG_OF_LIBFDT=y
-+CONFIG_REMAKE_ELF=y
++CONFIG_SPECIFY_CONSOLE_INDEX=y
 diff --git a/include/configs/vexpress_aemv8.h b/include/configs/vexpress_aemv8.h
-index f0c5ceb3849a..854fbb41bfc1 100644
+index 0c11b6b3331e..7b4c808ad874 100644
 --- a/include/configs/vexpress_aemv8.h
 +++ b/include/configs/vexpress_aemv8.h
-@@ -86,7 +86,7 @@
- #endif
- #endif /* !CONFIG_GICV3 */
+@@ -198,7 +198,8 @@
+ 		"fdtfile=board.dtb\0"					\
+ 		"fdt_alt_name=juno\0"
  
--#if defined(CONFIG_TARGET_VEXPRESS64_BASE_FVP) && !defined(CONFIG_DM_ETH)
-+#if (defined(CONFIG_TARGET_VEXPRESS64_BASE_FVP) || defined(CONFIG_TARGET_VEXPRESS64_BASE_FVP_AARCH32)) && !defined(CONFIG_DM_ETH)
- /* The Vexpress64 BASE_FVP simulator uses SMSC91C111 */
- #define CONFIG_SMC91111			1
- #define CONFIG_SMC91111_BASE		(V2M_PA_BASE + 0x01A000000)
-@@ -114,7 +114,7 @@
- #ifdef CONFIG_TARGET_VEXPRESS64_JUNO
- #define PHYS_SDRAM_2			(0x880000000)
- #define PHYS_SDRAM_2_SIZE		0x180000000
--#elif CONFIG_NR_DRAM_BANKS == 2
-+#elif CONFIG_TARGET_VEXPRESS64_BASE_FVP && CONFIG_NR_DRAM_BANKS == 2
- #define PHYS_SDRAM_2			(0x880000000)
- #define PHYS_SDRAM_2_SIZE		0x80000000
- #endif
-@@ -171,23 +171,41 @@
- 				"fdt_addr_r=0x80000000\0" \
- 				BOOTENV
- 
--#elif CONFIG_TARGET_VEXPRESS64_BASE_FVP
+-#elif CONFIG_TARGET_VEXPRESS64_BASE_FVP			/* ARMv8-A base model */
 +#elif defined(CONFIG_TARGET_VEXPRESS64_BASE_FVP) || \
 +        defined(CONFIG_TARGET_VEXPRESS64_BASE_FVP_AARCH32)
  
--#define VEXPRESS_KERNEL_ADDR	0x80080000
--#define VEXPRESS_FDT_ADDR	0x8fc00000
--#define VEXPRESS_BOOT_ADDR	0x8fd00000
--#define VEXPRESS_RAMDISK_ADDR	0x8fe00000
-+#define VEXPRESS_KERNEL_ADDR   0x80080000
-+#define VEXPRESS_FDT_ADDR      0x8fc00000
-+#define VEXPRESS_BOOT_ADDR     0x8fd00000
-+#define VEXPRESS_RAMDISK_ADDR  0x8fe00000
- 
--#define CONFIG_EXTRA_ENV_SETTINGS	\
-+#define CONFIG_EXTRA_ENV_SETTINGS      \
- 				"kernel_name=Image\0"		\
--				"kernel_addr_r=" __stringify(VEXPRESS_KERNEL_ADDR) "\0"	\
--				"ramdisk_name=ramdisk.img\0"	\
--				"ramdisk_addr_r=" __stringify(VEXPRESS_RAMDISK_ADDR) "\0" \
--				"fdtfile=devtree.dtb\0"	\
--				"fdt_addr_r=" __stringify(VEXPRESS_FDT_ADDR) "\0"	\
--				"boot_name=boot.img\0" \
--				"boot_addr_r=" __stringify(VEXPRESS_BOOT_ADDR) "\0"
--
-+                                "kernel_addr_r=" __stringify(VEXPRESS_KERNEL_ADDR) "\0" \
-+                                "ramdisk_name=ramdisk.img\0"    \
-+                                "ramdisk_addr_r=" __stringify(VEXPRESS_RAMDISK_ADDR) "\0" \
-+                                "fdtfile=devtree.dtb\0" \
-+                                "fdt_addr_r=" __stringify(VEXPRESS_FDT_ADDR) "\0"       \
-+                                "boot_name=boot.img\0" \
-+                                "boot_addr_r=" __stringify(VEXPRESS_BOOT_ADDR) "\0"
-+
-+#ifndef CONFIG_BOOTCOMMAND
-+#define CONFIG_BOOTCOMMAND	"if smhload ${boot_name} ${boot_addr_r}; then " \
-+				"  set bootargs; " \
-+				"  abootimg addr ${boot_addr_r}; " \
-+				"  abootimg get dtb --index=0 fdt_addr_r; " \
-+				"  bootm ${boot_addr_r} ${boot_addr_r} " \
-+				"  ${fdt_addr_r}; " \
-+				"else; " \
-+				"  smhload ${kernel_name} ${kernel_addr_r}; " \
-+				"  smhload ${fdtfile} ${fdt_addr_r}; " \
-+				"  smhload ${ramdisk_name} ${initrd_addr_r} "\
-+				"  initrd_end; " \
-+				"  fdt addr ${fdt_addr_r}; fdt resize; " \
-+				"  fdt chosen ${ramdisk_addr_r} ${initrd_end}; " \
-+				"  bootz $kernel_addr_r - $fdt_addr_r; " \
-+				"fi"
-+#endif
- #endif
- 
- /* Monitor Command Prompt */
--- 
-2.30.2
-
+ #define BOOT_TARGET_DEVICES(func)	\
+ 	func(SMH, smh, na)		\

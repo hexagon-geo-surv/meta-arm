@@ -1,8 +1,8 @@
-From f8ccaf53dec63d57bab2f86b822f9fb3ed06d132 Mon Sep 17 00:00:00 2001
+From 32cecd34f0f04606884c1a8e89acf492fa8b9f80 Mon Sep 17 00:00:00 2001
 From: Vishnu Banavath <vishnu.banavath@arm.com>
 Date: Fri, 10 Dec 2021 20:03:35 +0000
-Subject: [PATCH 13/25] efi_capsule: corstone1000: pass interface id and buffer
- event id using register w4
+Subject: [PATCH] efi_capsule: corstone1000: pass interface id and buffer event
+ id using register w4
 
 Initially the interface/event IDs are passed to the SP using register
 w3 and w5.
@@ -23,7 +23,7 @@ Upstream-Status: Pending [Not submitted to upstream yet]
  2 files changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/include/configs/corstone1000.h b/include/configs/corstone1000.h
-index 4d20090c9b..77f96e87a1 100644
+index 4d20090c9b1a..77f96e87a1a4 100644
 --- a/include/configs/corstone1000.h
 +++ b/include/configs/corstone1000.h
 @@ -24,6 +24,12 @@
@@ -40,10 +40,10 @@ index 4d20090c9b..77f96e87a1 100644
  #define CORSTONE1000_CAPSULE_BUFFER_SIZE	(8192) /* 32 MB */
  
 diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 636b61f0ad..c22b9b5aa0 100644
+index 36ea6388fa54..f7200c2a9c18 100644
 --- a/lib/efi_loader/efi_capsule.c
 +++ b/lib/efi_loader/efi_capsule.c
-@@ -28,6 +28,8 @@
+@@ -29,6 +29,8 @@
  #ifdef CONFIG_TARGET_CORSTONE1000
  #include <arm_ffa.h>
  #include <cpu_func.h>
@@ -52,7 +52,7 @@ index 636b61f0ad..c22b9b5aa0 100644
  
  void *__efi_runtime_data corstone1000_capsule_buf; /* capsule shared buffer virtual address */
  efi_guid_t corstone1000_capsule_guid = EFI_CORSTONE1000_CAPSULE_ID_GUID;
-@@ -582,11 +584,12 @@ static int __efi_runtime efi_corstone1000_buffer_ready_event(u32 capsule_image_s
+@@ -766,11 +768,12 @@ static int __efi_runtime efi_corstone1000_buffer_ready_event(u32 capsule_image_s
  	log_debug("[%s]\n", __func__);
  
  	/*
@@ -69,6 +69,3 @@ index 636b61f0ad..c22b9b5aa0 100644
  
  	return ffa_bus_ops_get()->sync_send_receive(NULL, CORSTONE1000_SEPROXY_PART_ID, &msg, 0);
  }
--- 
-2.17.1
-

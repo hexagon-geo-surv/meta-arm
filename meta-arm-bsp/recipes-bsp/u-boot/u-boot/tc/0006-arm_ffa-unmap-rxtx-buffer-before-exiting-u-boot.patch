@@ -1,7 +1,7 @@
-From 47be0456ea1760837d2de857e57842e595e9ea5e Mon Sep 17 00:00:00 2001
+From 3377e558a6ab4a46367d687d63267903e95c5c97 Mon Sep 17 00:00:00 2001
 From: Davidson K <davidson.kumaresan@arm.com>
 Date: Mon, 27 Jun 2022 14:11:27 +0530
-Subject: [PATCH 7/7] arm_ffa: unmap rxtx buffer before exiting u-boot
+Subject: [PATCH] arm_ffa: unmap rxtx buffer before exiting u-boot
 
 The linux kernel ffa driver will be used after the kernel boots. It
 will try to map its own rxtx buffer. But there can be only one rxtx
@@ -19,7 +19,7 @@ Upstream-Status: Pending [Not submitted to upstream yet]
  1 file changed, 12 insertions(+)
 
 diff --git a/drivers/arm-ffa/core.c b/drivers/arm-ffa/core.c
-index 98e2d2fa17..0c619439cb 100644
+index 98e2d2fa1767..0c619439cb38 100644
 --- a/drivers/arm-ffa/core.c
 +++ b/drivers/arm-ffa/core.c
 @@ -1470,6 +1470,16 @@ static const struct udevice_id ffa_match_id[] = {
@@ -46,6 +46,3 @@ index 98e2d2fa17..0c619439cb 100644
 +	.remove		= ffa_remove,
 +	.flags		= DM_FLAG_OS_PREPARE,
  };
--- 
-2.34.1
-

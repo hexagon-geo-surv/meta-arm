@@ -1,7 +1,7 @@
-From 2ab887402b9e22842d07e5f2fe1ac54518555af5 Mon Sep 17 00:00:00 2001
+From dce825ca0b5af12da672a2ded8310842b5290068 Mon Sep 17 00:00:00 2001
 From: Davidson K <davidson.kumaresan@arm.com>
 Date: Mon, 6 Jun 2022 13:24:42 +0530
-Subject: [PATCH 6/7] arm: total_compute: enable capsule update
+Subject: [PATCH] arm: total_compute: enable capsule update
 
 It includes:
 * Enabling runtime capsule update
@@ -20,7 +20,7 @@ Upstream-Status: Pending [Not submitted to upstream yet]
  3 files changed, 16 insertions(+)
 
 diff --git a/arch/arm/dts/total_compute.dts b/arch/arm/dts/total_compute.dts
-index 96edacda0b..9b2cbfb452 100644
+index 96edacda0b30..9b2cbfb452f6 100644
 --- a/arch/arm/dts/total_compute.dts
 +++ b/arch/arm/dts/total_compute.dts
 @@ -45,8 +45,15 @@
@@ -40,11 +40,11 @@ index 96edacda0b..9b2cbfb452 100644
 +	};
  };
 diff --git a/configs/total_compute_defconfig b/configs/total_compute_defconfig
-index 6a375543cd..531ce41cd3 100644
+index 807e9ebd8622..b7590f788fec 100644
 --- a/configs/total_compute_defconfig
 +++ b/configs/total_compute_defconfig
-@@ -52,3 +52,8 @@ CONFIG_SYS_FLASH_PROTECTION=y
- CONFIG_SYS_FLASH_CFI=y
+@@ -60,3 +60,8 @@ CONFIG_SYS_FLASH_CFI=y
+ CONFIG_SYS_MAX_FLASH_SECT=256
  CONFIG_LIBAVB=y
  CONFIG_OF_LIBFDT_OVERLAY=y
 +CONFIG_ARM_FFA_TRANSPORT=y
@@ -53,18 +53,15 @@ index 6a375543cd..531ce41cd3 100644
 +CONFIG_EFI_CAPSULE_ON_DISK=y
 +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
 diff --git a/include/configs/total_compute.h b/include/configs/total_compute.h
-index 62bdb4f6a3..4b00f47ec6 100644
+index f759b69b040a..099063996a46 100644
 --- a/include/configs/total_compute.h
 +++ b/include/configs/total_compute.h
-@@ -59,4 +59,8 @@
- #define CONFIG_SYS_FLASH_EMPTY_INFO	/* flinfo indicates empty blocks */
- #define FLASH_MAX_SECTOR_SIZE		0x00040000
+@@ -43,4 +43,8 @@
+ 
+ #define CONFIG_SYS_FLASH_BASE		0x0C000000
  
 +/* Shared buffer used for communication between u-boot and the FWU SP */
 +#define FFA_SHARED_MM_BUFFER_SIZE	4 * 1024 * 1024 /* 4 MB */
 +#define FFA_SHARED_MM_BUFFER_ADDR	(0xFCA00000)
 +
  #endif /* __TOTAL_COMPUTE_H */
--- 
-2.34.1
-

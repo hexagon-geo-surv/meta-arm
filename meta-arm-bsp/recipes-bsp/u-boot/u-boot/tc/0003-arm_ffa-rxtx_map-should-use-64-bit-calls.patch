@@ -1,7 +1,7 @@
-From 6eee50e5376356b1faeb30507b411120a8b5c7d1 Mon Sep 17 00:00:00 2001
+From ee970e0e5b162041805fdaea3c24e4f019156171 Mon Sep 17 00:00:00 2001
 From: Davidson K <davidson.kumaresan@arm.com>
 Date: Mon, 6 Jun 2022 15:13:15 +0530
-Subject: [PATCH 4/7] arm_ffa: rxtx_map should use 64 bit calls
+Subject: [PATCH] arm_ffa: rxtx_map should use 64 bit calls
 
 rxtx_map deals with the 64 bit addresses and hence the 64 bit calls
 should be used
@@ -14,7 +14,7 @@ Upstream-Status: Pending [Not submitted to upstream yet]
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/include/arm_ffa.h b/include/arm_ffa.h
-index 313f46f747..9627107079 100644
+index 313f46f74764..9627107079f6 100644
 --- a/include/arm_ffa.h
 +++ b/include/arm_ffa.h
 @@ -58,12 +58,13 @@
@@ -32,6 +32,3 @@ index 313f46f747..9627107079 100644
  #define FFA_RXTX_UNMAP				FFA_SMC_32(0x67)
  #define FFA_RX_RELEASE				FFA_SMC_32(0x65)
  #define FFA_MSG_SEND_DIRECT_REQ				FFA_SMC_32(0x6F)
--- 
-2.34.1
-
