@@ -1,7 +1,7 @@
-From 787a802afb8c05fcb5117c1cbb612c51554aad24 Mon Sep 17 00:00:00 2001
+From fec14fd6331f05d2f666e3c61d2257d5acbb164d Mon Sep 17 00:00:00 2001
 From: Rui Miguel Silva <rui.silva@linaro.org>
 Date: Wed, 18 Dec 2019 21:52:34 +0000
-Subject: [PATCH 1/2] armv7: adding generic timer access through MMIO
+Subject: [PATCH] armv7: adding generic timer access through MMIO
 
 Upstream-Status: Pending [Not submitted to upstream yet]
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
@@ -124,17 +124,14 @@ index 000000000000..edd806e06e42
 +	return gd->arch.timer_rate_hz;
 +}
 diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
-index f505722f6b04..e0df0026c985 100644
+index ea71f9d23449..1496d9b88233 100644
 --- a/scripts/config_whitelist.txt
 +++ b/scripts/config_whitelist.txt
-@@ -900,6 +900,7 @@ CONFIG_SYS_MMC_U_BOOT_DST
+@@ -610,6 +610,7 @@ CONFIG_SYS_MMC_U_BOOT_DST
  CONFIG_SYS_MMC_U_BOOT_OFFS
  CONFIG_SYS_MMC_U_BOOT_SIZE
  CONFIG_SYS_MMC_U_BOOT_START
 +CONFIG_SYS_MMIO_TIMER
- CONFIG_SYS_MONITOR_LEN
- CONFIG_SYS_MONITOR_SEC
  CONFIG_SYS_MOR_VAL
--- 
-2.38.1
-
+ CONFIG_SYS_MRAM_BASE
+ CONFIG_SYS_NAND_AMASK
