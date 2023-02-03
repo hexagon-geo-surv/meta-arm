@@ -3,8 +3,13 @@ ARMFILESPATHS := "${THISDIR}/files:"
 COMPATIBLE_MACHINE:generic-arm64 = "generic-arm64"
 FILESEXTRAPATHS:prepend:generic-arm64 = "${ARMFILESPATHS}"
 SRC_URI:append:generic-arm64 =" \
+    file://0001-Revert-arm64-defconfig-Enable-Tegra-MGBE-driver.patch \
+    file://0002-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch \
     file://generic-arm64-kmeta;type=kmeta;destsuffix=generic-arm64-kmeta \
     "
+
+
+
 
 FILESEXTRAPATHS:prepend:qemuarm64-secureboot = "${ARMFILESPATHS}"
 SRC_URI:append:qemuarm64-secureboot = " \
