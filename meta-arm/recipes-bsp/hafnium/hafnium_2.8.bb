@@ -20,7 +20,7 @@ SRC_URI = "gitsm://git.trustedfirmware.org/hafnium/hafnium.git;protocol=https;br
            file://0001-Use-pkg-config-native-to-find-the-libssl-headers.patch;patchdir=third_party/linux \
            file://0001-work-around-visibility-issue.patch;patchdir=third_party/dtc \
           "
-SRCREV = "79e9522d26fc2a88a44af149034acc27312b73a1"
+SRCREV = "b7d27acb9c63a52f8bd8a37d1eee335d4ccfbe93"
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
@@ -72,11 +72,5 @@ do_deploy() {
     cp -rf ${D}/firmware/* ${DEPLOYDIR}/
 }
 addtask deploy after do_install
-
-python() {
-    # https://developer.trustedfirmware.org/T898
-    if d.getVar("BUILD_ARCH") != "x86_64":
-        raise bb.parse.SkipRecipe("Cannot be built on non-x86-64 hosts")
-}
 
 EXCLUDE_FROM_WORLD = "1"
