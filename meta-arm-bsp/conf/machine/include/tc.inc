@@ -6,7 +6,6 @@ MACHINEOVERRIDES =. "tc:"
 
 # Das U-boot
 UBOOT_MACHINE ?= "total_compute_defconfig"
-PREFERRED_VERSION_u-boot ?= "2022.04"
 UBOOT_RD_LOADADDRESS = "0x88000000"
 UBOOT_RD_ENTRYPOINT = "0x88000000"
 UBOOT_LOADADDRESS = "0x80080000"
@@ -23,7 +22,7 @@ UBOOT_SIGN_KEYDIR = "${DEPLOY_DIR_IMAGE}/keys"
 FIT_GENERATE_KEYS = "1"
 FIT_SIGN_INDIVIDUAL = "1"
 
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-arm64-ack"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
 
 # OP-TEE
 PREFERRED_VERSION_optee-os ?= "3.18%"
@@ -37,5 +36,7 @@ KERNEL_CLASSES = " kernel-fitimage "
 
 IMAGE_FSTYPES += "cpio.gz"
 INITRAMFS_IMAGE ?= "core-image-minimal"
+
+EXTRA_IMAGEDEPENDS += "trusted-firmware-a"
 
 SERIAL_CONSOLES = "115200;ttyAMA0"
