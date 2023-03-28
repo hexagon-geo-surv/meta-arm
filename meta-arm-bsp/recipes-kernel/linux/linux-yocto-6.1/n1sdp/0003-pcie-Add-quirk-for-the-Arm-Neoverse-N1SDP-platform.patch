@@ -1,4 +1,4 @@
-From 5aa5769af625c79589fd84b8afc06149c2362218 Mon Sep 17 00:00:00 2001
+From 62f03be02221220fa3fe9332e181244f484abfa8 Mon Sep 17 00:00:00 2001
 From: Deepak Pandey <Deepak.Pandey@arm.com>
 Date: Fri, 31 May 2019 16:42:43 +0100
 Subject: [PATCH] pcie: Add quirk for the Arm Neoverse N1SDP platform
@@ -41,10 +41,10 @@ Signed-off-by: Adam Johnston <adam.johnston@arm.com>
  create mode 100644 drivers/pci/controller/pcie-n1sdp.c
 
 diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-index bbbc31391a65..973aa3b4d407 100644
+index 0b6af3348e79..933ae9bab661 100644
 --- a/arch/arm64/configs/defconfig
 +++ b/arch/arm64/configs/defconfig
-@@ -214,6 +214,7 @@ CONFIG_NFC_S3FWRN5_I2C=m
+@@ -216,6 +216,7 @@ CONFIG_NFC_S3FWRN5_I2C=m
  CONFIG_PCI=y
  CONFIG_PCIEPORTBUS=y
  CONFIG_PCIEAER=y

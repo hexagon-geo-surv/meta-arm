@@ -1,8 +1,7 @@
-From 891eeb87cddb0d52bc9eac39afcca5027a660be6 Mon Sep 17 00:00:00 2001
+From 60289da5f8708643dcfad187f93d0927823faf02 Mon Sep 17 00:00:00 2001
 From: Jon Mason <jdmason@kudzu.us>
 Date: Fri, 3 Feb 2023 05:21:07 -0500
-Subject: [PATCH 2/2] Revert "arm64: defconfig: Add Nuvoton NPCM family
- support"
+Subject: [PATCH] Revert "arm64: defconfig: Add Nuvoton NPCM family support"
 
 This reverts commit 45472f1e5348c7b755b4912f2f529ec81cea044b
 
@@ -40,6 +39,3 @@ index 70919b241469..4f09b80a1b96 100644
  CONFIG_COMMON_CLK_BD718XX=m
  CONFIG_CLK_RASPBERRYPI=m
  CONFIG_CLK_IMX8MM=y
--- 
-2.30.2
-
