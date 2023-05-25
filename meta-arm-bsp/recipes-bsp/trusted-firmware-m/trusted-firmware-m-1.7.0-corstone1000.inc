@@ -30,10 +30,6 @@ SRCREV_openamp = "347397decaa43372fc4d00f965640ebde042966d"
 EXTRA_OECMAKE += "-DLIBOPENAMP_SRC_PATH=${S}/../openamp -DLIBOPENAMP_BIN_PATH=${B}/libopenamp-build"
 
 
-SRC_URI:remove:corstone1000 =" \
-    file://rwx.patch    \
-"
-
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI:append:corstone1000 = " \
     file://0001-Platform-corstone1000-make-sure-to-write-fwu-metadata-to-repl.patch      \
