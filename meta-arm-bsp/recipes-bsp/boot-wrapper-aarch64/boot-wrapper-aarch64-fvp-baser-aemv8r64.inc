@@ -1,6 +1,7 @@
 COMPATIBLE_MACHINE = "fvp-baser-aemv8r64"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/${MACHINE}:"
+SRCREV = "d3b1a15d18542b2086e72bfdc3fc43f454772a3b"
 SRC_URI:append = " \
     file://0001-aarch64-Rename-labels-and-prepare-for-lower-EL-booti.patch \
     file://0002-aarch64-Prepare-for-EL1-booting.patch \
