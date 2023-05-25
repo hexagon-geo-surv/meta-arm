@@ -9,9 +9,9 @@ COMPATIBLE_MACHINE ?= "invalid"
 
 SRC_URI_TRUSTED_FIRMWARE_A_TESTS ?= "git://git.trustedfirmware.org/TF-A/tf-a-tests.git;protocol=https"
 SRC_URI = "${SRC_URI_TRUSTED_FIRMWARE_A_TESTS};branch=${SRCBRANCH} \
-          file://tf-a-tests-no-warn-rwx-segments.patch"
-SRCBRANCH = "lts-v2.8"
-SRCREV = "85442d2943440718c2c2c9c5c690202b4b4f5725"
+          "
+SRCBRANCH = "master"
+SRCREV = "df6783437cdc98dabf4f49568312b86460f72efa"
 
 DEPENDS += "optee-os"
 
