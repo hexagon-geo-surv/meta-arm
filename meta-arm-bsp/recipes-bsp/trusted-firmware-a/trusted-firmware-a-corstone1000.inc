@@ -4,11 +4,6 @@ COMPATIBLE_MACHINE = "(corstone1000)"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/corstone1000:"
 
-SRC_URI:append = " \ 
-	file://0001-Fix-FF-A-version-in-SPMC-manifest.patch \
-    file://0002-feat-corstone1000-bl2-loads-fip-based-on-metadata.patch \
-    "
-
 TFA_DEBUG = "1"
 TFA_UBOOT ?= "1"
 TFA_MBEDTLS = "1"
