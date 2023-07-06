@@ -14,15 +14,19 @@ class OEFVPSSHTarget(OESSHTarget):
     def __init__(self, logger, target_ip, server_ip, timeout=300, user='root',
                  port=None, dir_image=None, rootfs=None, bootlog=None, **kwargs):
         super().__init__(logger, target_ip, server_ip, timeout, user, port)
-        image_dir = pathlib.Path(dir_image)
-        # rootfs may have multiple extensions so we need to strip *all* suffixes
+        image_dir = pathlib.Path(dir_image)    
         basename = pathlib.Path(rootfs)
-        basename = basename.name.replace("".join(basename.suffixes), "")
-        self.fvpconf = image_dir / (basename + ".fvpconf")
+        basename = basename.name.replace("".join(basename.suffixes), "")       
+        # All .fvpconf configuration files
+        configs = image_dir.glob(basename + "*.fvpconf")
+        # Just the symbolic links
+        configs = [p for p in configs if p.is_file() and p.is_symlink()]
+        if not configs:
+            raise FileNotFoundError(f"Cannot find any .fvpconf in {image_dir}")
+        # Sorted by modification time
+        configs = sorted(configs, key=lambda p: p.stat().st_mtime)
+        self.fvpconf = configs[-1]
         self.bootlog = bootlog
-
-        if not self.fvpconf.exists():
-            raise FileNotFoundError(f"Cannot find {self.fvpconf}")
 
     def _after_start(self):
         pass
