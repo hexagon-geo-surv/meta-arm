@@ -15,7 +15,8 @@ repos:
       meta-arm-toolchain:
 
   poky:
-    url: https://git.yoctoproject.org/git/poky
+    url: https://git.yoctoproject.org/git/poky-contrib
+    branch: zedd/kernel
     layers:
       meta:
       meta-poky:
