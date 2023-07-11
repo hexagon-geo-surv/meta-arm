@@ -44,6 +44,7 @@ SRC_URI:append:corstone1000 = " \
            file://0005-rpmsg-arm-update-chrdev-to-ctrldev-registration.patch \
            file://0006-Adds-workaround-for-cs1k-specific-bug.patch \
         "
+SRC_URI:remove:corstone1000 = "file://0001-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch"
 
 SRC_URI:append:corstone1000 = " ${@bb.utils.contains('MACHINE_FEATURES', \
                                                             'corstone1000_kernel_debug', \
@@ -84,7 +85,11 @@ SRC_URI:append:juno = " \
     file://0002-arm64-dts-fvp-Add-SPE-to-Foundation-FVP.patch \
     file://0003-arm64-dts-fvp-Add-information-about-L1-and-L2-caches.patch \
     file://0004-ARM-dts-vexpress-align-LED-node-names-with-dtschema.patch \
+    file://0001-Revert-arm64-defconfig-Enable-Tegra-MGBE-driver.patch \
+    file://0002-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch \
+    file://0001-gcc-plugins-Reorganize-gimple-includes-for-GCC-13.patch \
     "
+SRC_URI:remove:juno = "file://0001-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch"
 
 #
 # Musca B1/S2 can't run Linux
@@ -111,7 +116,11 @@ SRC_URI:append:n1sdp = " \
     file://enable-realtek-R8169.cfg \
     file://enable-usb_conn_gpio.cfg \
     file://usb_xhci_pci_renesas.cfg \
+    file://0001-Revert-arm64-defconfig-Enable-Tegra-MGBE-driver.patch \
+    file://0002-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch \
+    file://0001-gcc-plugins-Reorganize-gimple-includes-for-GCC-13.patch \
     "
+SRC_URI:remove:n1sdp = "file://0001-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch"
 # Since we use the intree defconfig and the preempt-rt turns off some configs
 # do_kernel_configcheck will display warnings. So, lets disable it.
 KCONF_AUDIT_LEVEL:n1sdp:pn-linux-yocto-rt = "0"

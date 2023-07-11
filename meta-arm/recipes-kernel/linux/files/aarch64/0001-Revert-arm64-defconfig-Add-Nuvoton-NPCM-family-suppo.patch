@@ -1,0 +1,25 @@
+From 7ad7769fd73e9cd131ddb8fc9808e72b4c00c205 Mon Sep 17 00:00:00 2001
+From: Jon Mason <jdmason@kudzu.us>
+Date: Fri, 3 Feb 2023 05:21:07 -0500
+Subject: [PATCH] Revert "arm64: defconfig: Add Nuvoton NPCM family support"
+
+This reverts commit 45472f1e5348c7b755b4912f2f529ec81cea044b
+
+Signed-off-by: Jon Mason <jon.mason@arm.com>
+Upstream-Status: Inappropriate
+---
+ arch/arm64/configs/defconfig | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
+index a24609e14d50..1b72579105e7 100644
+--- a/arch/arm64/configs/defconfig
++++ b/arch/arm64/configs/defconfig
+@@ -1124,7 +1124,6 @@ CONFIG_COMMON_CLK_S2MPS11=y
+ CONFIG_COMMON_CLK_PWM=y
+ CONFIG_COMMON_CLK_RS9_PCIE=y
+ CONFIG_COMMON_CLK_VC5=y
+-CONFIG_COMMON_CLK_NPCM8XX=y
+ CONFIG_COMMON_CLK_BD718XX=m
+ CONFIG_CLK_RASPBERRYPI=m
+ CONFIG_CLK_IMX8MM=y
