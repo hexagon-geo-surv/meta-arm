@@ -18,6 +18,8 @@ SRC_URI = "git://github.com/OP-TEE/optee_test.git;branch=master;protocol=https \
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
+INSANE_SKIP:append = " 32bit-time"
+
 EXTRA_OEMAKE += "TA_DEV_KIT_DIR=${TA_DEV_KIT_DIR} \
                  CROSS_COMPILE_HOST=${HOST_PREFIX} \
                  CROSS_COMPILE_TA=${HOST_PREFIX} \
