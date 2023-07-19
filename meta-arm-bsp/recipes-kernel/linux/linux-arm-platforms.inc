@@ -99,6 +99,8 @@ KBUILD_DEFCONFIG:n1sdp = "defconfig"
 KCONFIG_MODE:n1sdp = "--alldefconfig"
 FILESEXTRAPATHS:prepend:n1sdp := "${ARMBSPFILESPATHS}"
 SRC_URI:append:n1sdp = " \
+    file://0001-Revert-arm64-defconfig-Enable-Tegra-MGBE-driver.patch \
+    file://0002-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch \
     file://0001-iommu-arm-smmu-v3-workaround-for-ATC_INV_SIZE_ALL-in.patch \
     file://0002-n1sdp-pci_quirk-add-acs-override-for-PCI-devices.patch \
     file://0003-pcie-Add-quirk-for-the-Arm-Neoverse-N1SDP-platform.patch \
@@ -120,6 +122,10 @@ KCONF_AUDIT_LEVEL:n1sdp:pn-linux-yocto-rt = "0"
 COMPATIBLE_MACHINE:sgi575 = "sgi575"
 KBUILD_DEFCONFIG:sgi575 = "defconfig"
 KCONFIG_MODE:sgi575 = "--alldefconfig"
+SRC_URI:append:sgi575 = " \
+    file://0001-Revert-arm64-defconfig-Enable-Tegra-MGBE-driver.patch \
+    file://0002-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch \
+    "
 
 #
 # Total Compute (TC0/TC1) KMACHINE
@@ -127,3 +133,7 @@ KCONFIG_MODE:sgi575 = "--alldefconfig"
 COMPATIBLE_MACHINE:tc = "(tc0|tc1)"
 KBUILD_DEFCONFIG:tc = "defconfig"
 KCONFIG_MODE:tc = "--alldefconfig"
+SRC_URI:append:tc = " \
+    file://0001-Revert-arm64-defconfig-Enable-Tegra-MGBE-driver.patch \
+    file://0002-Revert-arm64-defconfig-Add-Nuvoton-NPCM-family-suppo.patch \
+    "
