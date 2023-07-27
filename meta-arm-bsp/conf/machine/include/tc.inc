@@ -4,6 +4,8 @@ require conf/machine/include/arm/arch-armv8a.inc
 
 MACHINEOVERRIDES =. "tc:"
 
+TFM_PLATFORM = "arm/rss/tc"
+
 # Das U-boot
 UBOOT_MACHINE ?= "total_compute_defconfig"
 UBOOT_RD_LOADADDRESS = "0x88000000"
