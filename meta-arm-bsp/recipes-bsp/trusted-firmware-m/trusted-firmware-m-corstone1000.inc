@@ -31,7 +31,6 @@ SRC_URI:append:corstone1000 = " \
     file://0001-Platform-corstone1000-Increase-BL2-size-in-flash-lay.patch \
     file://0002-Platform-Corstone1000-Increase-BL2_DATA_SIZE.patch \
     file://0003-Platform-Corstone1000-Calculate-the-new-CRC32-value-.patch \
-    file://0004-arm-trusted-firmware-m-disable-fatal-warnings.patch \
     "
 
 # TF-M ships patches for external dependencies that needs to be applied
