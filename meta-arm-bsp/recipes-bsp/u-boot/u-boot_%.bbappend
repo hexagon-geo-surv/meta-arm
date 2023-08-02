@@ -61,6 +61,7 @@ SRC_URI:append:corstone1000 = " \
         file://0041-corstone1000-enable-PSCI-reset.patch				  \
         file://0042-Enable-EFI-set-get-time-services.patch                                \
         file://0043-corstone1000-fix-compilation-warnings-in-fwu_plat_get_bootidx.patch   \ 
+	file://0033-Increase-the-unzipped-Kernel-size.patch			  \
         "
 
 #
