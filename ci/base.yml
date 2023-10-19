@@ -31,7 +31,7 @@ local_conf_header:
     PACKAGE_CLASSES = "package_ipk"
     PACKAGECONFIG:remove:pn-qemu-system-native = "gtk+ sdl"
     PACKAGECONFIG:append:pn-perf = " coresight"
-    INHERIT += "rm_work"
+    INHERIT += "rm_work cve-check"
     DISTRO_FEATURES:remove = "ptest"
   extrapackages: |
     CORE_IMAGE_EXTRA_INSTALL += "perf opencsd"
