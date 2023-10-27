@@ -5,7 +5,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files/optee-os/tc:"
 SRC_URI:append:tc = " file://sp_layout.json \
     file://0001-WIP-Enable-managed-exit.patch \
-    file://0002-plat-totalcompute-fix-TZDRAM-start-and-size.patch \
     "
 
 COMPATIBLE_MACHINE = "(tc?)"
