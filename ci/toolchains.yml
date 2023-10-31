@@ -2,11 +2,11 @@ header:
   version: 14
   includes:
     - ci/base.yml
+    - ci/qemuarm64.yml
 
 # Target is arm64 and SDK is x86-64 to ensure that we exercise both
 # architectures
 
-machine: qemuarm64
 local_conf_header:
   toolchains: |
     SDKMACHINE = "x86_64"

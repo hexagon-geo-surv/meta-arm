@@ -4,8 +4,7 @@ header:
   version: 14
   includes:
     - ci/base.yml
-
-machine: qemuarm64
+    - ci/qemuarm64.yml
 
 local_conf_header:
   license: |
