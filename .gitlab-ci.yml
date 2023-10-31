@@ -107,126 +107,8 @@ update-repos:
 #  VIRT: [none, xen]
 #  TESTING: testimage
 
-corstone1000-fvp:
-  extends: .build
-  parallel:
-    matrix:
-      - TESTING: [testimage, tftf]
-
-corstone1000-mps3:
-  extends: .build
-  parallel:
-    matrix:
-      - TESTING: [none, tftf]
-
-
-fvp-base:
-  extends: .build
-  parallel:
-    matrix:
-      - TESTING: testimage
-      - FIRMWARE: edk2
-
 fvps:
   extends: .build
-
-generic-arm64:
-  extends: .build
-
-juno:
-  extends: .build
-  parallel:
-    matrix:
-      - TOOLCHAINS: [gcc, clang]
-        FIRMWARE: [u-boot, edk2]
-
-musca-b1:
-  extends: .build
-
-musca-s1:
-  extends: .build
-
-n1sdp:
-  extends: .build
-  parallel:
-    matrix:
-      - TESTING: [none, n1sdp-ts, n1sdp-optee, tftf]
-
-qemu-generic-arm64:
-  extends: .build
-  parallel:
-    matrix:
-      - KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
-        TOOLCHAINS: [gcc, clang]
-        TESTING: testimage
-
-qemuarm64-secureboot:
-  extends: .build
-  parallel:
-    matrix:
-      - KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
-        TOOLCHAINS: [gcc, clang]
-        TCLIBC: [glibc, musl]
-        TS: [none, qemuarm64-secureboot-ts]
-        TESTING: testimage
-
-qemuarm64:
-  extends: .build
-  parallel:
-    matrix:
-      - DISTRO: poky
-        KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
-        TOOLCHAINS: [gcc, clang]
-        FIRMWARE: [u-boot, edk2]
-        TESTING: testimage
-      - DISTRO: poky-tiny
-        TESTING: testimage
-      - VIRT: xen
-
-qemuarm-secureboot:
-  extends: .build
-  parallel:
-    matrix:
-      - KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
-        TOOLCHAINS: [gcc, clang]
-        TCLIBC: [glibc, musl]
-        TESTING: testimage
-      - TOOLCHAINS: external-gccarm
-        TESTING: testimage
-
-qemuarm:
-  extends: .build
-  parallel:
-    matrix:
-      - DISTRO: poky
-        KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
-        TOOLCHAINS: [gcc, clang]
-        FIRMWARE: [u-boot, edk2]
-        TESTING: testimage
-      - DISTRO: poky-tiny
-        TESTING: testimage
-      - VIRT: xen
-
-qemuarmv5:
-  extends: .build
-  parallel:
-    matrix:
-      - DISTRO: poky
-        KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
-        TESTING: testimage
-      - DISTRO: poky-tiny
-        TESTING: testimage
-
-sgi575:
-  extends: .build
-
-tc1:
-  extends: .build
-  parallel:
-    matrix:
-      - TESTING: testimage
-  tags:
-    - x86_64
 
 toolchains:
   extends: .build
@@ -299,3 +181,6 @@ documentation:
   artifacts:
     paths:
       - build-docs/
+
+include:
+  - ci/machines.yml
