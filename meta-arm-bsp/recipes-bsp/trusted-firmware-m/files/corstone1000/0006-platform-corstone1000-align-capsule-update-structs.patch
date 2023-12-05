@@ -1,4 +1,4 @@
-From 6807d4b30f7d4ed32d3c54dfcaf3ace63eaa4f02 Mon Sep 17 00:00:00 2001
+From cbf6359f0cb472d5cdc74bcd90801c543485a16d Mon Sep 17 00:00:00 2001
 From: Emekcan Aras <emekcan.aras@arm.com>
 Date: Thu, 26 Oct 2023 11:46:04 +0100
 Subject: [PATCH] platform: corstone1000: align capsule update structs
@@ -9,6 +9,7 @@ crashes in case of unaligned pointer access.
 
 Signed-off-by: Emekcan Aras <emekcan.aras@arm.com>
 Upstream-Status: Pending
+
 ---
  .../fw_update_agent/uefi_capsule_parser.c          | 14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
@@ -23,7 +24,7 @@ index c706c040ac..9f8d12ad4e 100644
      uint32_t                capsule_image_size;
 -} efi_capsule_header_t;
 +} efi_capsule_header_t __attribute__((packed, aligned(1)));
-
+ 
  typedef struct {
      uint32_t                version;
      uint16_t                embedded_driver_count;
@@ -31,7 +32,7 @@ index c706c040ac..9f8d12ad4e 100644
      uint64_t                item_offset_list[];
 -} efi_firmware_management_capsule_header_t;
 +} efi_firmware_management_capsule_header_t __attribute__((packed, aligned(1)));
-
+ 
  typedef struct {
      uint32_t                version;
 @@ -52,14 +52,14 @@ typedef struct {
@@ -40,7 +41,7 @@ index c706c040ac..9f8d12ad4e 100644
      uint64_t                image_capsule_support; //introduced in v3
 -} efi_firmware_management_capsule_image_header_t;
 +} efi_firmware_management_capsule_image_header_t __attribute__((packed, aligned(1)));
-
+ 
  typedef struct {
      uint32_t                signature;
      uint32_t                header_size;
@@ -48,31 +49,28 @@ index c706c040ac..9f8d12ad4e 100644
      uint32_t                lowest_supported_version;
 -} fmp_payload_header_t;
 +} fmp_payload_header_t __attribute__((packed, aligned(1)));
-
+ 
  #define ANYSIZE_ARRAY 0
-
+ 
 @@ -68,18 +68,18 @@ typedef struct {
      uint16_t                wRevision;
      uint16_t                wCertificateType;
      uint8_t                 bCertificate[ANYSIZE_ARRAY];
 -} WIN_CERTIFICATE;
 +} WIN_CERTIFICATE __attribute__((packed, aligned(1)));
-
+ 
  typedef struct {
      WIN_CERTIFICATE         hdr;
      struct efi_guid         cert_type;
      uint8_t                 cert_data[ANYSIZE_ARRAY];
 -} win_certificate_uefi_guid_t;
 +} win_certificate_uefi_guid_t __attribute__((packed, aligned(1)));
-
+ 
  typedef struct {
      uint64_t                    monotonic_count;
      win_certificate_uefi_guid_t   auth_info;
 -} efi_firmware_image_authentication_t;
 +} efi_firmware_image_authentication_t __attribute__((packed, aligned(1)));
-
-
+ 
+ 
  enum uefi_capsule_error_t uefi_capsule_retrieve_images(void* capsule_ptr,
---
-2.25.1
-

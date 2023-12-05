@@ -1,0 +1,52 @@
+From f72b11cb485b633d619ed8013006bbc5dcd257ad Mon Sep 17 00:00:00 2001
+From: Jon Mason <jon.mason@arm.com>
+Date: Thu, 14 Dec 2023 19:54:03 +0000
+Subject: [PATCH] Missing headerfile
+
+The following error is being seen:
+| In file included from /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/platform/ext/target/arm/corstone1000/tfm_hal_isolation.c:13:
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:52:54: error: unknown type name 'size_t'
+|    52 | void tfm_get_mem_region_security_attr(const void *p, size_t s,
+|       |                                                      ^~~~~~
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:12:1: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+|    11 | #include <stdbool.h>
+|   +++ |+#include <stddef.h>
+|    12 |
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:69:52: error: unknown type name 'size_t'
+|    69 | void tfm_get_secure_mem_region_attr(const void *p, size_t s,
+|       |                                                    ^~~~~~
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:69:52: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:86:48: error: unknown type name 'size_t'
+|    86 | void tfm_get_ns_mem_region_attr(const void *p, size_t s,
+|       |                                                ^~~~~~
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:86:48: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:100:49: error: unknown type name 'size_t'
+|   100 | int32_t tfm_has_access_to_region(const void *p, size_t s, uint32_t flags);
+|       |                                                 ^~~~~~
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:100:49: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:123:44: error: unknown type name 'size_t'
+|   123 | int32_t check_address_range(const void *p, size_t s,
+|       |                                            ^~~~~~
+| /builder/meta-arm/build/workspace/sources/trusted-firmware-m/tfm/secure_fw/spm/core/tfm_multi_core.h:123:44: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+
+Per the suggestion, adding stddef.h resolves the issue
+
+Upstream-Status: Pending [Not submitted to upstream yet]
+Signed-off-by: Jon Mason <jon.mason@arm.com>
+
+---
+ secure_fw/spm/core/tfm_multi_core.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/secure_fw/spm/core/tfm_multi_core.h b/secure_fw/spm/core/tfm_multi_core.h
+index d6d920f356..7484aa9831 100644
+--- a/secure_fw/spm/core/tfm_multi_core.h
++++ b/secure_fw/spm/core/tfm_multi_core.h
+@@ -9,6 +9,7 @@
+ #define __TFM_MULTI_CORE_H__
+ 
+ #include <stdbool.h>
++#include <stddef.h>
+ 
+ /* Follow CMSE flag definitions */
+ #define MEM_CHECK_MPU_READWRITE         (1 << 0x0)

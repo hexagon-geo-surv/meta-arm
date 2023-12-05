@@ -1,4 +1,4 @@
-From b05fb661b3afc3ed8e3d4817df2798e9d4877b39 Mon Sep 17 00:00:00 2001
+From eb51741402b0e6019fe50dae0e4038c182313d29 Mon Sep 17 00:00:00 2001
 From: Emekcan Aras <emekcan.aras@arm.com>
 Date: Mon, 15 May 2023 10:46:18 +0100
 Subject: [PATCH] Platform: Corstone1000: Increase BL2_DATA_SIZE
@@ -14,10 +14,10 @@ Upstream-Status: Submitted [https://review.trustedfirmware.org/c/TF-M/trusted-fi
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/platform/ext/target/arm/corstone1000/partition/region_defs.h b/platform/ext/target/arm/corstone1000/partition/region_defs.h
-index abfac39b62..e7f0bad2ba 100644
+index 99e822f516..34a38d52e8 100644
 --- a/platform/ext/target/arm/corstone1000/partition/region_defs.h
 +++ b/platform/ext/target/arm/corstone1000/partition/region_defs.h
-@@ -90,9 +90,10 @@
+@@ -86,9 +86,10 @@
  #define BL2_CODE_SIZE     (IMAGE_BL2_CODE_SIZE)
  #define BL2_CODE_LIMIT    (BL2_CODE_START + BL2_CODE_SIZE - 1)
  

@@ -34,11 +34,10 @@ SRC_URI:append:corstone1000 = " \
     file://0002-Platform-Corstone1000-Increase-BL2_DATA_SIZE.patch \
     file://0003-Platform-Corstone1000-Calculate-the-new-CRC32-value-.patch \
     file://0004-arm-trusted-firmware-m-disable-fatal-warnings.patch \
-    file://0005-Platform-corstone1000-add-unique-firmware-GUID.patch \
-    file://0006-Platform-Corstone1000-Enable-Signed-Capsule.patch \
-    file://0007-platform-corstone1000-increase-ITS-max-asset-size.patch \
-    file://0008-platform-corstone1000-align-capsule-update-structs.patch \
-    file://0009-platform-corstone1000-fix-synchronization-issue-on-o.patch \
+    file://0005-platform-corstone1000-Increase-ITS-max-asset-size.patch \
+    file://0006-platform-corstone1000-align-capsule-update-structs.patch \
+    file://0007-platform-corstone1000-fix-synchronization-issue-on-o.patch \
+    file://0008-Missing-headerfile.patch \
     "
 
 # TF-M ships patches for external dependencies that needs to be applied
@@ -52,10 +51,10 @@ apply_tfm_patches() {
 do_patch[postfuncs] += "apply_tfm_patches"
 
 do_install() {
-  install -D -p -m 0644 ${B}/install/outputs/tfm_s_signed.bin ${D}/firmware/tfm_s_signed.bin
-  install -D -p -m 0644 ${B}/install/outputs/bl2_signed.bin ${D}/firmware/bl2_signed.bin
-  install -D -p -m 0644 ${B}/install/outputs/bl1_1.bin ${D}/firmware/bl1_1.bin
-  install -D -p -m 0644 ${B}/install/outputs/bl1_provisioning_bundle.bin ${D}/firmware/bl1_provisioning_bundle.bin
+  install -D -p -m 0644 ${B}/bin/tfm_s_signed.bin ${D}/firmware/tfm_s_signed.bin
+  install -D -p -m 0644 ${B}/bin/bl2_signed.bin ${D}/firmware/bl2_signed.bin
+  install -D -p -m 0644 ${B}/bin/bl1_1.bin ${D}/firmware/bl1_1.bin
+  install -D -p -m 0644 ${B}/bin/bl1_provisioning_bundle.bin ${D}/firmware/bl1_provisioning_bundle.bin
 }
 
 create_bl1_image(){

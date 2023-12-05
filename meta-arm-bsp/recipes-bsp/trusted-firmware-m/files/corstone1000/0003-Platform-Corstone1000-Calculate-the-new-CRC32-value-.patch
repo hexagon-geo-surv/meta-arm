@@ -1,4 +1,4 @@
-From 88cfce2e04913d48ec8636b6a3550d71ebdd49c4 Mon Sep 17 00:00:00 2001
+From 7596437c0d89b5a1d36930990d52c37ba66dddeb Mon Sep 17 00:00:00 2001
 From: Emekcan Aras <emekcan.aras@arm.com>
 Date: Mon, 15 May 2023 10:47:27 +0100
 Subject: [PATCH] Platform: Corstone1000: Calculate the new CRC32 value after
@@ -15,41 +15,14 @@ Signed-off-by: Emekcan Aras <emekcan.aras@arm.com>
 Upstream-Status: Submitted [https://review.trustedfirmware.org/c/TF-M/trusted-firmware-m/+/24104/7]
 
 ---
- .../arm/corstone1000/fw_update_agent/fwu_agent.c       | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ .../ext/target/arm/corstone1000/fw_update_agent/fwu_agent.c   | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/platform/ext/target/arm/corstone1000/fw_update_agent/fwu_agent.c b/platform/ext/target/arm/corstone1000/fw_update_agent/fwu_agent.c
-index afd8d66e42..f564f2902c 100644
+index 2e6de255be..9c31aeee9d 100644
 --- a/platform/ext/target/arm/corstone1000/fw_update_agent/fwu_agent.c
 +++ b/platform/ext/target/arm/corstone1000/fw_update_agent/fwu_agent.c
-@@ -802,6 +802,8 @@ static enum fwu_agent_error_t flash_full_capsule(
-     }
-     metadata->active_index = previous_active_index;
-     metadata->previous_active_index = active_index;
-+    metadata->crc_32 = crc32((uint8_t *)&metadata->version,
-+                              sizeof(struct fwu_metadata) - sizeof(uint32_t));
- 
-     ret = metadata_write(metadata);
-     if (ret) {
-@@ -913,6 +915,8 @@ static enum fwu_agent_error_t accept_full_capsule(
-     if (ret) {
-         return ret;
-     }
-+    metadata->crc_32 = crc32((uint8_t *)&metadata->version,
-+                              sizeof(struct fwu_metadata) - sizeof(uint32_t));
- 
-     ret = metadata_write(metadata);
-     if (ret) {
-@@ -1007,6 +1011,8 @@ static enum fwu_agent_error_t fwu_select_previous(
-     if (ret) {
-         return ret;
-     }
-+    metadata->crc_32 = crc32((uint8_t *)&metadata->version,
-+                              sizeof(struct fwu_metadata) - sizeof(uint32_t));
- 
-     ret = metadata_write(metadata);
-     if (ret) {
-@@ -1119,8 +1125,7 @@ static enum fwu_agent_error_t update_nv_counters(
+@@ -1125,8 +1125,7 @@ static enum fwu_agent_error_t update_nv_counters(
  
      FWU_LOG_MSG("%s: enter\n\r", __func__);
  
@@ -59,7 +32,7 @@ index afd8d66e42..f564f2902c 100644
          switch (i) {
              case FWU_BL2_NV_COUNTER:
                  tfm_nv_counter_i = PLAT_NV_COUNTER_BL1_0;
-@@ -1141,7 +1146,6 @@ static enum fwu_agent_error_t update_nv_counters(
+@@ -1147,7 +1146,6 @@ static enum fwu_agent_error_t update_nv_counters(
          if (err != TFM_PLAT_ERR_SUCCESS) {
              return FWU_AGENT_ERROR;
          }
