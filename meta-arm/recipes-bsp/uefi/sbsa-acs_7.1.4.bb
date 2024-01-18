@@ -12,7 +12,7 @@ SRC_URI += "git://github.com/ARM-software/sbsa-acs;destsuffix=edk2/ShellPkg/Appl
             "
 
 
-SRCREV_acs = "23253befbed2aee7304470fd83b78672488a7fc2"
+SRCREV_acs = "be169f0008d86341e1e48cb70d524bd1518c3acc"
 SRCREV_libc = "d3dea661da9ae4a3421a80905e75a8dc77aa980e"
 
 # GCC12 trips on it
