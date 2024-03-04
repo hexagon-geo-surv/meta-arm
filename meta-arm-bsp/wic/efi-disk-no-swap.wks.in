@@ -3,7 +3,7 @@
 # can directly dd to boot media.  This image will not contain a swap
 # partition but will contain custom machine specific grub arguments.
 
-part /boot --source bootimg-efi --sourceparams="loader=${EFI_PROVIDER}" --label boot --active --align 1024 --use-uuid
+part /boot --source bootimg-efi --sourceparams="loader=${EFI_PROVIDER}" --label boot --active --align 1024 --use-uuid --overhead-factor 1.1
 
 part / --source rootfs --fstype=ext4 --label root --align 1024 --use-uuid
 
