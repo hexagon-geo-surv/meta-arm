@@ -140,8 +140,8 @@ fvp-base:
   extends: .build
   parallel:
     matrix:
-      - TESTING: testimage
-      - FIRMWARE: edk2
+      - FIRMWARE: [u-boot, edk2]
+        TESTING: testimage
       - SYSTEMREADY_FIRMWARE: arm-systemready-firmware
 
 arm-systemready-ir-acs:
