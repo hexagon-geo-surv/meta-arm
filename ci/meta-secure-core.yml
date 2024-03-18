@@ -3,7 +3,7 @@ header:
 
 repos:
   meta-secure-core:
-    url: https://github.com/Wind-River/meta-secure-core.git
+    url: https://github.com/jonmason/meta-secure-core.git
     layers:
       meta-secure-core-common:
       meta-signing-key:
