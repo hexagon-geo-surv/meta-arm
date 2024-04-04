@@ -1,0 +1,15 @@
+header:
+  version: 14
+  includes:
+    - ci/base.yml
+
+repos:
+  poky:
+    layers:
+      meta-yocto-bsp:
+
+local_conf_header:
+  failing_tests: |
+    EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+
+machine: genericarm64
