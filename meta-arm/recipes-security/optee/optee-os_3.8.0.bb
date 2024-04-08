@@ -5,8 +5,6 @@ HOMEPAGE = "https://www.op-tee.org/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 
-PV = "3.8.0+git${SRCPV}"
-
 inherit deploy python3native
 require optee.inc
 
