@@ -19,8 +19,8 @@ SRC_URI = " \
     git://android.googlesource.com/kernel/common.git;protocol=https;branch=deprecated/android-4.19-q-release \
     "
 
-# ASB-2020-06-05_4.19-q-release tag commit
-SRCREV = "ebd43352dd92e56f14a4985a3c99de767fc8f9cf"
+# ASB-2022-10-01_4.19-q-release tag commit
+SRCREV = "39793952000376f86462e9cfc33766da2aa57084"
 
 S = "${WORKDIR}/git"
 
