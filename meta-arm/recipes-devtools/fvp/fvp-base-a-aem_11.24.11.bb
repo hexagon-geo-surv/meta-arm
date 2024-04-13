@@ -8,6 +8,9 @@ LIC_FILES_CHKSUM = "file://license_terms/license_agreement.txt;md5=1a33828e132ba
 SRC_URI[fvp-aarch64.sha256sum] = "7a3593dafd3af6897b3a0a68f66701201f8f3e02a3d981ba47494b2f18853648"
 SRC_URI[fvp-x86_64.sha256sum] = "0f132334834cbc66889a62dd72057c976d7c7dfcfeec21799e9c78fb2ce24720"
 
+# The CSS used in the FVP homepage make it too difficult to query with the tooling currently in Yocto
+UPSTREAM_VERSION_UNKNOWN = "1"
+
 MODEL_CODE = "FVP_Base_RevC-2xAEMvA"
 
 COMPATIBLE_HOST = "(aarch64|x86_64).*-linux"
