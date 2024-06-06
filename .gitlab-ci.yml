@@ -326,6 +326,14 @@ qemuarmv5:
       - DISTRO: poky-tiny
         TESTING: testimage
 
+qemuarmv9:
+  extends: .build
+  parallel:
+    matrix:
+      - KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
+        TOOLCHAINS: [gcc, clang]
+        TESTING: testimage
+
 sbsa-ref:
   extends: .build
   parallel:

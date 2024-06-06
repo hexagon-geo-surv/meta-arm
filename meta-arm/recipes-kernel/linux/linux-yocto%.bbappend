@@ -1,5 +1,7 @@
 ARMFILESPATHS := "${THISDIR}/files:"
 
+COMPATIBLE_MACHINE:qemuarmv9 = "qemuarmv9"
+
 FILESEXTRAPATHS:prepend:qemuarm64-secureboot = "${ARMFILESPATHS}"
 SRC_URI:append:qemuarm64-secureboot = " \
     file://tee.cfg \
