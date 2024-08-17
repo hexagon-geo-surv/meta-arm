@@ -7,6 +7,7 @@ inherit module
 
 SRC_URI = "git://gitlab.arm.com/linux-arm/linux-trusted-services;protocol=https;branch=main \
            file://Makefile;subdir=git \
+           file://0001-Update-include-file-for-6.10-and-later-kernels.patch \
           "
 S = "${WORKDIR}/git"
 
