@@ -8,3 +8,6 @@ local_conf_header:
     TFA_UBOOT = "0"
     TFA_UEFI = "0"
     TFTF_TESTS = "1"
+
+target:
+ - trusted-firmware-a

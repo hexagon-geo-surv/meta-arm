@@ -147,9 +147,9 @@ corstone1000-fvp:
   extends: .build
   parallel:
     matrix:
-      - FIRMWARE: corstone1000-firmware-only
-        TESTING: [testimage, tftf]
-      - FIRMWARE: none
+      #FIXME - this isn't actually testing tftf
+      - TESTING: tftf
+      - FIRMWARE: [none, corstone1000-firmware-only]
         TESTING: testimage
       - SYSTEMREADY_FIRMWARE: arm-systemready-firmware
 
@@ -157,9 +157,9 @@ corstone1000-mps3:
   extends: .build
   parallel:
     matrix:
-      - FIRMWARE: corstone1000-firmware-only
-        TESTING: [none, tftf]
-      - FIRMWARE: none
+      #FIXME - this isn't actually testing tftf
+      - TESTING: tftf
+      - FIRMWARE: [none, corstone1000-firmware-only]
 
 documentation:
   extends: .setup
