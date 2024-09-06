@@ -8,7 +8,6 @@ header:
 local_conf_header:
   trusted_services: |
     TEST_SUITES:append = " trusted_services"
-    TEST_SUITES:remove = "parselogs"
     # Include TS Crypto, TS Protected Storage, and TS Internal Trusted Storage and SPs into optee-os image
     # FIXME - remove TS SMM Gateway due to QEMU v9.0.0 test failures
     MACHINE_FEATURES:append = " arm-ffa ts-crypto ts-storage ts-its"

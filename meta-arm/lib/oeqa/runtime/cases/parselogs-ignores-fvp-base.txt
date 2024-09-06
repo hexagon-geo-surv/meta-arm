@@ -1,0 +1,3 @@
+basic-mmio-gpio: Failed to locate of_node [id: -2]
+(EE) Server terminated with error (1). Closing log file.
+(EE) no screens found(EE)
