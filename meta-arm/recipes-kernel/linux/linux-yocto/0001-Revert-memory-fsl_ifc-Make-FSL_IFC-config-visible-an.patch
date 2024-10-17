@@ -1,0 +1,46 @@
+From 9621a1a84d9a2c16ffc5feb1e5221b6d388a6f5f Mon Sep 17 00:00:00 2001
+From: Jon Mason <jdmason@kudzu.us>
+Date: Thu, 17 Oct 2024 15:42:46 -0400
+Subject: [PATCH] Revert "memory: fsl_ifc: Make FSL_IFC config visible and
+ selectable"
+
+This reverts commit e59386c300198385d8bf33336de3b8c165d20d00.
+
+Signed-off-by: Jon Mason <jon.mason@arm.com>
+Upstream-Status: Inappropriate [Revert]
+
+---
+ drivers/memory/Kconfig       | 2 +-
+ drivers/mtd/nand/raw/Kconfig | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
+index 5a410a40f914..72c0df129d5c 100644
+--- a/drivers/memory/Kconfig
++++ b/drivers/memory/Kconfig
+@@ -168,7 +168,7 @@ config FSL_CORENET_CF
+ 	  represents a coherency violation.
+ 
+ config FSL_IFC
+-	bool "Freescale IFC driver"
++	bool "Freescale IFC driver" if COMPILE_TEST
+ 	depends on FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST
+ 	depends on HAS_IOMEM
+ 
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index aa584aaf8ae3..67b7cb67c030 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -254,7 +254,8 @@ config MTD_NAND_FSL_IFC
+ 	tristate "Freescale IFC NAND controller"
+ 	depends on FSL_SOC || ARCH_LAYERSCAPE || SOC_LS1021A || COMPILE_TEST
+ 	depends on HAS_IOMEM
+-	depends on FSL_IFC
++	select FSL_IFC
++	select MEMORY
+ 	help
+ 	  Various Freescale chips e.g P1010, include a NAND Flash machine
+ 	  with built-in hardware ECC capabilities.
+-- 
+2.39.5
+
