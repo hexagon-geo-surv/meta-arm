@@ -1,5 +1,8 @@
 ARMFILESPATHS := "${THISDIR}/files:"
 
+FILESEXTRAPATHS:prepend:aarch64 = "${ARMFILESPATHS}"
+SRC_URI:append:aarch64 = " file://no-fsl-ifc-nand.cfg"
+
 FILESEXTRAPATHS:prepend:qemuarm64-secureboot = "${ARMFILESPATHS}"
 SRC_URI:append:qemuarm64-secureboot = " \
     file://tee.cfg \
