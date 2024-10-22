@@ -67,10 +67,10 @@ stages:
     - if: '$BUILD_ENABLE_REGEX != null && $CI_JOB_NAME !~ $BUILD_ENABLE_REGEX'
       when: never
     # Allow the dev kernels to fail and not fail the overall build
-    - if: '$KERNEL == "linux-yocto-dev"'
+    - if: '$GITPKGS == "bleeding-edge"'
       allow_failure: true
     # Catch all for everything else
-    - if: '$KERNEL != "linux-yocto-dev"'
+    - if: '$GITPKGS != "bleeding-edge"'
   script:
     - KASFILES=$(./ci/jobs-to-kas "$CI_JOB_NAME" $EXTRA_KAS_FILES):lockfile.yml
     - echo KASFILES=$KASFILES
@@ -117,14 +117,14 @@ update-repos:
 #
 # Available options for building are
 #  DISTRO: [poky, poky-altcfg, poky-tiny]
-#  KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
+#  FIRMWARE: [u-boot, edk2]
+#  GITPKGS: [bleedingedge, none]
 #  TOOLCHAINS: [gcc, clang, external-gccarm]
 #  TCLIBC: [glibc, musl]
-#  FIRMWARE: [u-boot, edk2]
-#  TS: [none, trusted-services]
-#  VIRT: [none, xen]
-#  TESTING: testimage
 #  SECUREDEBUG: [none, secure-debug]
+#  TS: [none, trusted-services]
+#  TESTING: testimage
+#  VIRT: [none, xen]
 
 arm-systemready-ir-acs:
   extends: .build
@@ -153,10 +153,9 @@ corstone1000-fvp:
   extends: .build
   parallel:
     matrix:
+      - TESTING: testimage
       - FIRMWARE: corstone1000-firmware-only
         TESTING: [testimage, tftf]
-      - FIRMWARE: none
-        TESTING: testimage
       - SYSTEMREADY_FIRMWARE: arm-systemready-firmware
 
 corstone1000-mps3:
@@ -165,8 +164,7 @@ corstone1000-mps3:
     matrix:
       - FIRMWARE: corstone1000-firmware-only
         TESTING: [none, tftf]
-      - FIRMWARE: none
-        SECUREDEBUG: [none, secure-debug]
+      - SECUREDEBUG: [none, secure-debug]
 
 documentation:
   extends: .setup
@@ -196,8 +194,7 @@ fvp-base:
   parallel:
     matrix:
       - TS: [none, fvp-base-ts]
-        TESTING: testimage
-      - FIRMWARE: [u-boot, edk2]
+        FIRMWARE: [u-boot, edk2]
         TESTING: testimage
       - SYSTEMREADY_FIRMWARE: arm-systemready-firmware
 
@@ -209,9 +206,7 @@ genericarm64:
   parallel:
     matrix:
       - TOOLCHAINS: [gcc, clang]
-        TESTING: testimage
-      - KERNEL: linux-yocto-dev
-        GITPKGS: bleeding-edge
+        GITPKGS: [bleeding-edge, none]
         TESTING: testimage
 
 juno:
@@ -261,84 +256,68 @@ qemuarm64-secureboot:
   extends: .build
   parallel:
     matrix:
-      - KERNEL: [linux-yocto, linux-yocto-rt]
-        TOOLCHAINS: [gcc, clang]
-        TCLIBC: [glibc, musl]
-        TS: [none, qemuarm64-secureboot-ts]
-        TESTING: testimage
       - TOOLCHAINS: [gcc, clang]
+        TCLIBC: [glibc, musl]
         TS: [none, qemuarm64-secureboot-ts]
         UEFISB: [none, uefi-secureboot]
         TESTING: testimage
-      - KERNEL: linux-yocto-dev
-        GITPKGS: bleeding-edge
+      - GITPKGS: bleeding-edge
         TESTING: testimage
+      - VIRT: xen
 
 qemuarm64:
   extends: .build
   parallel:
     matrix:
-      - DISTRO: poky
-        KERNEL: [linux-yocto, linux-yocto-rt]
+      - DISTRO: [poky, poky-tiny]
         TOOLCHAINS: [gcc, clang]
         FIRMWARE: [u-boot, edk2]
         TESTING: testimage
-      - DISTRO: poky-tiny
-        TESTING: testimage
-      - VIRT: xen
-      - KERNEL: linux-yocto-dev
+      - GITPKGS: bleeding-edge
         TESTING: testimage
 
 qemuarm-secureboot:
   extends: .build
   parallel:
     matrix:
-      - KERNEL: [linux-yocto, linux-yocto-rt]
-        TOOLCHAINS: [gcc, clang]
-        TCLIBC: [glibc, musl]
-        TESTING: testimage
+      # external toolchain needs unique entry because it doesn't work with musl
       - TOOLCHAINS: external-gccarm
         TESTING: testimage
-      - KERNEL: linux-yocto-dev
-        GITPKGS: bleeding-edge
+      - TOOLCHAINS: [gcc, clang]
+        TCLIBC: [glibc, musl]
         TESTING: testimage
+      - GITPKGS: bleeding-edge
+        TESTING: testimage
+      - VIRT: xen
 
 qemuarm:
   extends: .build
   parallel:
     matrix:
-      - DISTRO: poky
-        KERNEL: [linux-yocto, linux-yocto-rt]
+      - DISTRO: [poky, poky-tiny]
         TOOLCHAINS: [gcc, clang]
         FIRMWARE: [u-boot, edk2]
         TESTING: testimage
-      - DISTRO: poky-tiny
-        TESTING: testimage
-      - VIRT: xen
-      - KERNEL: linux-yocto-dev
+      - GITPKGS: bleeding-edge
         TESTING: testimage
 
 qemuarmv5:
   extends: .build
   parallel:
     matrix:
-      - DISTRO: poky
-        KERNEL: [linux-yocto, linux-yocto-dev, linux-yocto-rt]
+      - DISTRO: [poky, poky-tiny, poky-altcfg]
         TESTING: testimage
-      - DISTRO: poky-tiny
+      - GITPKGS: bleeding-edge
         TESTING: testimage
 
 sbsa-ref:
   extends: .build
   parallel:
     matrix:
-      - KERNEL: [linux-yocto, linux-yocto-rt]
+      - DISTRO: [poky-altcfg, poky]
         TOOLCHAINS: [gcc, clang]
         TESTING: testimage
-      - DISTRO: poky-altcfg
-        TESTING: testimage
-      - KERNEL: linux-yocto-dev
-        GITPKGS: bleeding-edge
+      - GITPKGS: bleeding-edge
         TESTING: testimage
 
 selftest:
