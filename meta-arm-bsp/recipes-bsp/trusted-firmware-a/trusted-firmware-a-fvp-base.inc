@@ -67,4 +67,4 @@ EXTRA_OEMAKE += "ARM_ARCH_MAJOR=8 ARM_ARCH_MINOR=4"
 # to run the python cot-dt2c command.  Disable the local poetry and use
 # the provided cot-dt2c.
 EXTRA_OEMAKE += "POETRY=''"
-DEPENDS += "cot-dt2c-native"
+DEPENDS += "tf-a-cot-dt2c-native"
