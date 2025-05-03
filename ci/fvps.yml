@@ -43,15 +43,6 @@ target:
   - nativesdk-fvp-sgi575
 
   # IoT FVPs
-  - fvp-corstone320
-  - nativesdk-fvp-corstone320
-  - fvp-corstone315
-  - nativesdk-fvp-corstone315
-  - fvp-corstone310
-  - nativesdk-fvp-corstone310
-  - fvp-corstone300
-  - nativesdk-fvp-corstone300
-  - fvp-corstone1000
   - nativesdk-fvp-corstone1000
   - fvp-corstone700
   - nativesdk-fvp-corstone700
