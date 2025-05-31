@@ -10,8 +10,8 @@ SRC_URI += "git://github.com/ARM-software/sbsa-acs;destsuffix=edk2/ShellPkg/Appl
             file://0002-Enforce-using-good-old-BFD-linker.patch \
             "
 
-SRCREV_acs = "be169f0008d86341e1e48cb70d524bd1518c3acc"
-SRCREV_libc = "4667a82f0d873221f8b25ea701ce57a29270e4cb"
+SRCREV_acs = "642bc12bbc3b526f3931eca580002430c162f2a2"
+SRCREV_libc = "7bb4a7886c3b3e359289c03c5638f0174b39ebef"
 
 UPSTREAM_CHECK_URI = "https://github.com/ARM-software/sbsa-acs/releases"
 
