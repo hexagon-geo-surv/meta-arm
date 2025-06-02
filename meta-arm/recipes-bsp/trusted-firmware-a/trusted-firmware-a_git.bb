@@ -4,7 +4,7 @@ require recipes-bsp/trusted-firmware-a/trusted-firmware-a.inc
 SRCREV_tfa = "0035ab76e580b59f88ad5a6be76b7f2bebbac654"
 SRCBRANCH = "master"
 
-LIC_FILES_CHKSUM += "file://docs/license.rst;md5=83b7626b8c7a37263c6a58af8d19bee1"
+LIC_FILES_CHKSUM += "file://docs/license.rst;md5=1118e32884721c0be33267bd7ae11130"
 
 # in TF-A src, docs/getting_started/prerequisites.rst lists the expected version mbedtls
 # mbedtls-3.6.2
