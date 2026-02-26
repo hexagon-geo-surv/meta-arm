@@ -24,7 +24,7 @@ EXTRA_OECMAKE += "-DPLATFORM_IS_FVP=${TFM_PLATFORM_IS_FVP}"
 EXTRA_OECMAKE += "-DCC312_LEGACY_DRIVER_API_ENABLED=OFF"
 EXTRA_OECMAKE:append:corstone1000-fvp = " -DENABLE_MULTICORE=${@bb.utils.contains('MACHINE_FEATURES', 'corstone1000_fvp_smp', 'TRUE', 'FALSE', d)}"
 EXTRA_OECMAKE:append:corstone1000-mps3 = " -DPLATFORM_PSA_ADAC_SECURE_DEBUG=${@bb.utils.contains('MACHINE_FEATURES', 'secure-debug', 'ON', 'OFF', d)}"
-EXTRA_OECMAKE:append:corstone1000-mps3 = " -DPLATFORM_PSA_ADAC_SOURCE_PATH=${UNPACKDIR}/tfm-psa-adac -DPLATFORM_PSA_ADAC_BUILD_PATH=${B}/tfm-psa-adac-build"
+EXTRA_OECMAKE:append:corstone1000-mps3 = " -DPLATFORM_PSA_ADAC_SOURCE_PATH=${S}/external/tfm-psa-adac -DPLATFORM_PSA_ADAC_BUILD_PATH=${B}/tfm-psa-adac-build"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
@@ -46,9 +46,9 @@ SRC_URI:append:corstone1000 = " \
 
 FILESEXTRAPATHS:prepend:corstone1000-mps3 := "${THISDIR}/files/corstone1000/psa-adac:"
 SRC_URI:append:corstone1000-mps3 = " \
-    file://0001-PSA-revert-header-versions.patch;patchdir=../tfm-psa-adac \
-    file://0002-Fix-psa_key_handle_t-initialization.patch;patchdir=../tfm-psa-adac \
-    file://0003-cmake-Update-psa_adac_psa_crypto-dependencies.patch;patchdir=../tfm-psa-adac \
+    file://0001-PSA-revert-header-versions.patch;patchdir=external/tfm-psa-adac \
+    file://0002-Fix-psa_key_handle_t-initialization.patch;patchdir=external/tfm-psa-adac \
+    file://0003-cmake-Update-psa_adac_psa_crypto-dependencies.patch;patchdir=external/tfm-psa-adac \
     "
 
 create_bl1_image(){
